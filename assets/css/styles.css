@@ -1,0 +1,9 @@
+.start-section,
+.timer-section,
+.question-section,
+.form-section,
+.status-section,
+.end-section {
+  border: 1px solid black;
+  align-content: center;
+}
