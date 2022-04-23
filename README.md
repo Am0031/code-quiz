@@ -1,5 +1,7 @@
 # code-quiz
 
+This project is about creating a code quiz, with a choice of themes, a set of questions, and a high score board.
+
 Original notes:
 
 General Requirements
