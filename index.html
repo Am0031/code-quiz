@@ -6,17 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Code Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    /> -->
+
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
   <body>
     <header class="header">
-      <nav class="navbar">
+      <nav class="navbar box-row">
         <a class="navlink" href="index.html">Home</a>
         <a class="navlink" href="scores.html">High Scores</a>
       </nav>
@@ -29,15 +24,27 @@
           <button class="btn start-btn" id="start-btn">Start</button>
         </div>
       </section>
-      <section class="timer-section" id="timer-section">
+      <section class="theme-selection wrapper" id="theme-selection">
+        <div class="theme-container">
+          <h2>Pick a theme for your quiz</h2>
+          <ul>
+            <li class="btn theme-item">1</li>
+            <li class="btn theme-item">2</li>
+            <li class="btn theme-item">3</li>
+            <li class="btn theme-item">4</li>
+          </ul>
+        </div>
+      </section>
+      <section class="timer-section box-row" id="timer-section">
         <div>
           <p class="theme-display">Javascript Quiz</p>
         </div>
-        <div class="timer-display">
+        <div class="timer-display box-row">
           <p class="timer-item">Time remaining :</p>
           <span class="timer-item" id="timer-span">60</span>
         </div>
       </section>
+
       <section class="question-section wrapper" id="question-section">
         <div class="question-container">
           <h2>Question 1 : what is the xxx ?</h2>
@@ -60,16 +67,31 @@
       </section>
 
       <section class="form-section wrapper" id="form-section">
-        <form>
-          <div>
-            <div>
-              <input type="text" />
-            </div>
-            <div>Score</div>
-            <div>
-              <button type="submit" id="submit">submit</button>
-            </div>
-            <div>Alert Box</div>
+        <form class="form-container">
+          <div class="input-container box-row">
+            <label class="input-label" for="input">Enter your initials</label>
+            <input class="input-field" type="text" />
+          </div>
+          <div class="score-container box-row" id="score-container">
+            <p class="score-label">Score</p>
+            <textarea
+              readonly
+              class="score-field"
+              id="score"
+              aria-label="your score"
+            ></textarea>
+          </div>
+          <div class="submit-button-container box-row">
+            <button type="submit" id="submit" class="btn submit-btn">
+              Submit
+            </button>
+            <button type="button" id="continue" class="btn continue-btn">
+              Continue
+            </button>
+          </div>
+          <div class="alert-container">
+            Alert - You need to score above 0 for your score to be saved in the
+            high scores
           </div>
         </form>
       </section>
@@ -77,26 +99,17 @@
         <h1 class="end-title">Take the code quiz challenge again!</h1>
         <p>Thanks for taking the quiz. Do you want to try again?</p>
         <div class="retry">
-          <button class="retry-btn" id="retry-btn">Retry</button>
+          <button class="btn retry-btn" id="retry-btn">Retry</button>
         </div>
       </section>
     </main>
-    <footer></footer>
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script> -->
+    <footer class="footer">
+      <div class="footerbar box-row">
+        <div class="footer-text">Code Quiz</div>
+        <div class="footer-text">&copy; 2022 - Amelie Pira</div>
+      </div>
+    </footer>
+
     <script src="./assets/js/script.js" async defer></script>
   </body>
 </html>

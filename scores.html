@@ -9,22 +9,26 @@
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <a class="navlinks" href="index.html">Home</a>
-        <a class="navlinks" href="scores.html">High Scores</a>
+    <header class="header">
+      <nav class="navbar box-row">
+        <a class="navlink" href="index.html">Home</a>
+        <a class="navlink" href="scores.html">High Scores</a>
       </nav>
     </header>
     <main>
-      <section class="score-section" id="score-section">
+      <section class="high-score-section wrapper" id="high-score-section">
         <h1 class="score-title">Code quiz - Scores</h1>
         <p>See where you rank in this table of high scores</p>
-        <div class="scores"></div>
+        <table class="score-table"></table>
+        <a class="btn back-btn" id="back-btn" href="./index.html">Back</a>
       </section>
-      <section></section>
-      <section></section>
     </main>
-    <footer></footer>
+    <footer class="footer">
+      <div class="footerbar box-row">
+        <div class="footer-text">Code Quiz</div>
+        <div class="footer-text">&copy; 2022 - Amelie Pira</div>
+      </div>
+    </footer>
 
     <script src="./assets/js/script.js" async defer></script>
   </body>
