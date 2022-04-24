@@ -277,7 +277,7 @@ const chooseTheme = () => {
   //for each theme create li and append to ul
   for (let i = 0; i < themes.length; i += 1) {
     const li = document.createElement("li");
-    li.setAttribute("class", "theme-item btn");
+    li.setAttribute("class", "theme-item");
     li.setAttribute("data-text", themes[i]);
     li.setAttribute("id", themes[i]);
     li.textContent = themes[i];
@@ -294,8 +294,9 @@ const chooseTheme = () => {
   //const listLength = document.querySelectorAll("theme-item");
   //console.log(listLength);
 
-  const themeItems = document.querySelectorAll(".list li");
-  for (let i = 0; i < themes.Length; i += 1) {
+  const themeItems = document.getElementsByClassName("theme-item");
+  console.log(themeItems);
+  for (let i = 0; i < themeItems.Length; i += 1) {
     themeItems[i].addEventListener("click", handleClickList(event));
     console.log("assigned");
   }
