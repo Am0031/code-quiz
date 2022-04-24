@@ -294,9 +294,10 @@ const chooseTheme = () => {
   //const listLength = document.querySelectorAll("theme-item");
   //console.log(listLength);
 
-  const themeItems = document.querySelectorAll(".theme-item");
+  const themeItems = document.querySelectorAll(".list li");
   for (let i = 0; i < themes.Length; i += 1) {
     themeItems[i].addEventListener("click", handleClickList(event));
+    console.log("assigned");
   }
 
   return "css";
