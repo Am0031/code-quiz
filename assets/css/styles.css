@@ -10,7 +10,8 @@
 
 html,
 body,
-p {
+p,
+ul {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -26,6 +27,9 @@ button[disabled] {
 }
 .title {
   text-align: center;
+}
+.link {
+  text-decoration: none;
 }
 
 /*Style for header*/
@@ -49,7 +53,6 @@ button[disabled] {
   justify-content: space-between;
 }
 .navlink {
-  text-decoration: none;
   padding: 5px;
   color: var(--link);
 }
@@ -130,10 +133,6 @@ button[disabled] {
 .submit-button-container {
   justify-content: center;
   width: 100%;
-}
-
-.back-btn {
-  text-decoration: none;
 }
 
 /*media queries*/

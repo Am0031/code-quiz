@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Code Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
   <body>
+    <!--Header with nav links-->
     <header class="header">
       <nav class="navbar box-row">
-        <a class="navlink" href="index.html">Home</a>
-        <a class="navlink" href="scores.html">High Scores</a>
+        <a class="navlink link" href="index.html">Home</a>
+        <a class="navlink link" href="scores.html">High Scores</a>
       </nav>
     </header>
-    <main>
+    <!--Main section, where sections will be dynamically removed and created in JS-->
+    <main class="main" id="main">
+      <!--1st section - Start the quiz-->
       <section class="start-section wrapper" id="start-section">
         <h1 class="title">Take the code quiz challenge!</h1>
         <p>Try this quiz and see how you measure up against others.</p>
@@ -24,17 +26,19 @@
           <button class="btn start-btn" id="start-btn">Start</button>
         </div>
       </section>
+      <!--2nd section - Select the theme of the quiz-->
       <section class="theme-selection wrapper" id="theme-selection">
         <div class="theme-container">
           <h2 class="title">Pick a theme for your quiz</h2>
           <ul class="list">
-            <li class="btn theme-item" id="theme-item-1">1</li>
-            <li class="btn theme-item" id="theme-item-2">2</li>
-            <li class="btn theme-item" id="theme-item-3">3</li>
-            <li class="btn theme-item" id="theme-item-4">4</li>
+            <li class="btn theme-item" id="theme-html">HTML</li>
+            <li class="btn theme-item" id="theme-css">CSS</li>
+            <li class="btn theme-item" id="theme-javascript">Javascript</li>
+            <li class="btn theme-item" id="theme-api">API</li>
           </ul>
         </div>
       </section>
+      <!--3rd section - Theme and Timer banner-->
       <section class="timer-section box-row" id="timer-section">
         <div>
           <p class="theme-display">Javascript Quiz</p>
@@ -44,7 +48,7 @@
           <span class="timer-item" id="timer-span">60</span>
         </div>
       </section>
-
+      <!--4th section - Quiz questions with progress status-->
       <section class="question-section wrapper" id="question-section">
         <div class="question-container">
           <h2 class="question-text">Question 1 : what is the xxx ?</h2>
@@ -65,7 +69,7 @@
           <p>Correct answers : 2 / 6</p>
         </div>
       </section>
-
+      <!--5th section - Form to record score after quiz is completed-->
       <section class="form-section wrapper" id="form-section">
         <form class="form-container">
           <h2 class="title">Let's save your score!</h2>
@@ -84,7 +88,7 @@
           </div>
           <div class="submit-button-container box-row">
             <button type="submit" id="submit" class="btn submit-btn">
-              Submit
+              Continue
             </button>
           </div>
           <div class="alert-container">
@@ -93,15 +97,17 @@
           </div>
         </form>
       </section>
+      <!--6th section - End message and redirect to home page-->
       <section class="end-section wrapper" id="end-section">
         <h2 class="title">Take the code quiz challenge again!</h2>
         <p>Thanks for taking the quiz. Do you want to try again?</p>
-        <div class="retry">
-          <button class="btn retry-btn" id="retry-btn">Retry</button>
-        </div>
+        <a class="btn retry-btn link" id="retry-btn" href="./index.html"
+          >Retry</a
+        >
       </section>
     </main>
-    <footer class="footer">
+    <!--Footer-->
+    <footer class="footer" id="footer">
       <div class="footerbar box-row">
         <div class="footer-text">Code Quiz</div>
         <div class="footer-text">&copy; 2022 - Amelie Pira</div>
