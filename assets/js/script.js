@@ -1,5 +1,99 @@
 // global declarations
-const questions = [];
+const themes = ["html", "css", "javascript", "jquery"];
+
+const questions = [
+  {
+    theme = "html",
+    text = " What does the acronym HTML stand for?",
+    options = ["HyperText Markup Language", "HyperText Machine Language", "HyperText and links Markup Language", "None of these"],
+    correctIndex = 0
+  },
+  {
+    theme = "html",
+    text = "The correct sequence of HTML tags for starting a web page is : ",
+    options = ["Head, Title, HTML, Body", "HTML, Body, Title, Head", "HTML, Head, Title, Body", "HTML, Head, Body, Title "],
+    correctIndex = 2
+  },
+  {
+    theme = "html",
+    text = "Which element is responsible for introducing an empty line in HTML?",
+    options = ["<pre>", "<a>", "<b>", "<br>"],
+    correctIndex = 3
+  },
+  {
+    theme = "html",
+    text = "How to insert an image in HTML?",
+    options = ["<img href = \"jtp.png\" /> ", "<img url = \"jtp.png\" /> ", "<img link = \"jtp.png\" /> ", "<img src = \"jtp.png\" />"],
+    correctIndex = 3
+  },
+  {
+    theme = "css",
+    text = "What does the acronym CSS stand for?",
+    options = ["Cascade style sheets", "Color and style sheets", "Cascading style sheets", "Collection of styles sheets"],
+    correctIndex = 2
+  },
+  {
+    theme = "css",
+    text = "Which of the following is the correct syntax for referring the external style sheet?",
+    options = ["<style src = example.css>", "<style src = \"example.css\" >", "<stylesheet> example.css </stylesheet>", "<link rel=\"stylesheet\" type=\"text/css\" href=\"example.css\">"],
+    correctIndex = 3
+  },
+  {
+    theme = "css",
+    text = "The property in CSS used to change the background color of an element is : ",
+    options = ["color", "bgcolor", "background-color", "background-style"],
+    correctIndex = 2
+  },
+  {
+    theme = "css",
+    text = "Which of the following is the correct syntax to display the hyperlinks without any underline?",
+    options = ["a {text-decoration : underline;}", "a {decoration : no-underline;}", "a {text-decoration : none;}", "a {text-underline : none;}"],
+    correctIndex = 2
+  },
+  {
+    theme = "javascript",
+    text = "Which type of language is Javascript?",
+    options = ["a weakly typed language", "a strongly typed language", "a mixed-type language", "none of the above"],
+    correct = 0
+  },
+  {
+    theme = "javascript",
+    text = "Which of the following variables takes precedence over the others if the names are the same?",
+    options = ["The global variable", "The local variable", "The two of the above", "None of the above"],
+    correct = 1
+  },
+  {
+    theme = "javascript",
+    text = "Which of the following type of a variable is volatile?",
+    options = ["Mutable variable", "Dynamic variable", "Volatile variable", "Immutable variable"],
+    correct = 1
+  },
+  {
+    theme = "javascript",
+    text = "In JavaScript, which one of the following is not considered as an error?",
+    options = ["Syntax error", "Missing of semicolons", "Division by zero", "Missing of Bracket"],
+    correct = 2
+  },
+  {
+    theme = "javascript",
+    text = "In JavaScript the x===y statement implies that:",
+    options = ["Both x and y are equal in value, type and reference address as well.", "Both x and y are equal in value only.", "Both x and y are equal in the value and data type.", "x and y are not the same at all."],
+    correct = 2
+  },
+  {
+    theme = "jquery",
+    text = "jQuery is a : ",
+    options = ["JavaScript method", "JavaScript library", "JSON library", "PHP method"],
+    correct = 1
+  },
+  {
+    theme = "jquery",
+    text = "Which of the following sign is used as a shortcut for jQuery?",
+    options = ["the % sign", "the & sign", "the $ sign", "the @ sign"],
+    correct = 2
+  }
+];
+
 let questionIndex = 0;
 let timerValue = 10 * questions.length;
 let quizComplete = false;
