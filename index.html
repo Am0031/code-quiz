@@ -18,7 +18,7 @@
     </header>
     <main>
       <section class="start-section wrapper" id="start-section">
-        <h1 class="start-title">Take the code quiz challenge!</h1>
+        <h1 class="title">Take the code quiz challenge!</h1>
         <p>Try this quiz and see how you measure up against others.</p>
         <div class="start">
           <button class="btn start-btn" id="start-btn">Start</button>
@@ -26,12 +26,12 @@
       </section>
       <section class="theme-selection wrapper" id="theme-selection">
         <div class="theme-container">
-          <h2>Pick a theme for your quiz</h2>
-          <ul>
-            <li class="btn theme-item">1</li>
-            <li class="btn theme-item">2</li>
-            <li class="btn theme-item">3</li>
-            <li class="btn theme-item">4</li>
+          <h2 class="title">Pick a theme for your quiz</h2>
+          <ul class="list">
+            <li class="btn theme-item" id="theme-item-1">1</li>
+            <li class="btn theme-item" id="theme-item-2">2</li>
+            <li class="btn theme-item" id="theme-item-3">3</li>
+            <li class="btn theme-item" id="theme-item-4">4</li>
           </ul>
         </div>
       </section>
@@ -47,12 +47,12 @@
 
       <section class="question-section wrapper" id="question-section">
         <div class="question-container">
-          <h2>Question 1 : what is the xxx ?</h2>
-          <ul>
-            <li class="btn list-item">1</li>
-            <li class="btn list-item">2</li>
-            <li class="btn list-item">3</li>
-            <li class="btn list-item">4</li>
+          <h2 class="question-text">Question 1 : what is the xxx ?</h2>
+          <ul class="list" id="list">
+            <li class="btn list-item" id="list-item-1">1</li>
+            <li class="btn list-item" id="list-item-2">2</li>
+            <li class="btn list-item" id="list-item-3">3</li>
+            <li class="btn list-item" id="list-item-4">4</li>
           </ul>
         </div>
         <div class="status-container">
@@ -68,6 +68,7 @@
 
       <section class="form-section wrapper" id="form-section">
         <form class="form-container">
+          <h2 class="title">Let's save your score!</h2>
           <div class="input-container box-row">
             <label class="input-label" for="input">Enter your initials</label>
             <input class="input-field" type="text" />
@@ -85,9 +86,6 @@
             <button type="submit" id="submit" class="btn submit-btn">
               Submit
             </button>
-            <button type="button" id="continue" class="btn continue-btn">
-              Continue
-            </button>
           </div>
           <div class="alert-container">
             Alert - You need to score above 0 for your score to be saved in the
@@ -96,7 +94,7 @@
         </form>
       </section>
       <section class="end-section wrapper" id="end-section">
-        <h1 class="end-title">Take the code quiz challenge again!</h1>
+        <h2 class="title">Take the code quiz challenge again!</h2>
         <p>Thanks for taking the quiz. Do you want to try again?</p>
         <div class="retry">
           <button class="btn retry-btn" id="retry-btn">Retry</button>

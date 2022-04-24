@@ -24,6 +24,9 @@ button[disabled] {
   cursor: default;
   background: #c0c7cf;
 }
+.title {
+  text-align: center;
+}
 
 /*Style for header*/
 .header,
@@ -137,17 +140,39 @@ button[disabled] {
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
-    margin: 16px 0px 0px 0px;
-    padding: 10px 15px;
+    margin: 1rem 0 0 0;
+    padding: 0.6rem 1rem;
+  }
+  .question-container {
+    width: 100%;
+  }
+  .list {
+    padding: 0;
+  }
+  .alert-container {
+    padding: 1rem 0 1rem 0;
   }
 
-  #question-card {
-    font-size: 1rem;
+  .btn,
+  .start,
+  .retry,
+  .form-container,
+  .submit-button-container {
+    width: 100%;
+  }
+  .submit-button-container {
+    justify-content: space-evenly;
   }
 }
 
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+  }
+  .question-container {
+    width: 100%;
+  }
+  .list {
+    padding: 0;
   }
 }
