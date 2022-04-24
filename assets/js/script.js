@@ -198,7 +198,7 @@ const validateAnswer = () => {
   // if question is not last question then increment question index and render next question
 };
 
-const handleClickList = (event) => {
+const handleClick = (event) => {
   //event.stopPropagation();
   const target = event.target;
   // if (target.tagName === "LI") {
@@ -294,10 +294,11 @@ const chooseTheme = () => {
   //const listLength = document.querySelectorAll("theme-item");
   //console.log(listLength);
 
-  const themeItems = document.getElementsByClassName("theme-item");
+  const themeItems = document.querySelectorAll(".theme-item");
   console.log(themeItems);
-  for (let i = 0; i < themeItems.Length; i += 1) {
-    themeItems[i].addEventListener("click", handleClickList(event));
+  console.log(themeItems.length);
+  for (let i = 0; i < themeItems.length; i += 1) {
+    themeItems[i].addEventListener("click", handleClick(event));
     console.log("assigned");
   }
 
