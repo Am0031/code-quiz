@@ -23,7 +23,7 @@
         <h1 class="title">Take the code quiz challenge!</h1>
         <p>Try this quiz and see how you measure up against others.</p>
         <div class="start">
-          <button class="start-btn" id="start-btn">Start</button>
+          <button class="btn start-btn" id="start-btn">Start</button>
         </div>
       </section>
       <!--2nd section - Select the theme of the quiz-->
@@ -31,10 +31,10 @@
         <div class="theme-container">
           <h2 class="title">Pick a theme for your quiz</h2>
           <ul class="list">
-            <li class="theme-item" id="theme-html">HTML</li>
-            <li class="theme-item" id="theme-css">CSS</li>
-            <li class="theme-item" id="theme-javascript">Javascript</li>
-            <li class="theme-item" id="theme-jquery">jQuery</li>
+            <li class="btn theme-item" id="theme-html">HTML</li>
+            <li class="btn theme-item" id="theme-css">CSS</li>
+            <li class="btn theme-item" id="theme-javascript">Javascript</li>
+            <li class="btn theme-item" id="theme-jquery">jQuery</li>
           </ul>
         </div>
       </section>
@@ -53,10 +53,10 @@
         <div class="question-container">
           <h2 class="question-text">Question 1 : what is the xxx ?</h2>
           <ul class="list" id="list">
-            <li class="list-item" id="list-item-1">1</li>
-            <li class="list-item" id="list-item-2">2</li>
-            <li class="list-item" id="list-item-3">3</li>
-            <li class="list-item" id="list-item-4">4</li>
+            <li class="btn list-item" id="list-item-1">1</li>
+            <li class="btn list-item" id="list-item-2">2</li>
+            <li class="btn list-item" id="list-item-3">3</li>
+            <li class="btn list-item" id="list-item-4">4</li>
           </ul>
         </div>
         <div class="status-container">
@@ -87,7 +87,7 @@
             ></textarea>
           </div>
           <div class="submit-button-container box-row">
-            <button type="submit" id="submit" class="submit-btn">
+            <button type="submit" id="submit" class="btn submit-btn">
               Continue
             </button>
           </div>
@@ -101,7 +101,9 @@
       <section class="end-section wrapper" id="end-section">
         <h2 class="title">Take the code quiz challenge again!</h2>
         <p>Thanks for taking the quiz. Do you want to try again?</p>
-        <a class="retry-btn link" id="retry-btn" href="./index.html">Retry</a>
+        <a class="btn retry-btn link" id="retry-btn" href="./index.html"
+          >Retry</a
+        >
       </section>
     </main>
     <!--Footer-->
