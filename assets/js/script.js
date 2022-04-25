@@ -166,9 +166,13 @@ let quizComplete = false;
 const onLoad = () => {
   // initialise local storage
   //get info from local storage
+  const highScoresFromLS = JSON.parse(localStorage.getItem(highscores));
+  console.log(highScoresFromLS);
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
-  //if it exists, do nothing
+  if (!highScoresFromLS) {
+    localStorage.setItem("highScores", JSON.stringify([]));
+  }
 };
 
 // const removeSection = (target) => {
