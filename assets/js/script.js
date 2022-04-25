@@ -158,7 +158,7 @@ const questions = [
     correctIndex: 2,
   },
 ];
-
+let selectedQuestions = [];
 let questionIndex = 0;
 let timerValue = 10 * questions.length;
 let quizComplete = false;
@@ -201,16 +201,11 @@ const validateAnswer = () => {
 const handleThemeClick = (event) => {
   //event.stopPropagation();
   const selectedTheme = event.target.getAttribute("data-text");
-  const questionArray = questions.filter((question) => {
-    return question.theme === selectedTheme;
-  });
-  console.log(questionArray);
-
-  // if (target.tagName === "LI") {
-  //   const clickedItem = target.getAttribute("data-text");
-  //   return clickedItem;
-  // }
   console.log(selectedTheme);
+  selectedQuestions = questions.filter(
+    (question) => question.theme === selectedTheme
+  );
+  console.log(selectedQuestions);
 };
 
 const handleFormSubmit = () => {
