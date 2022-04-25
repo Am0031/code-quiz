@@ -198,15 +198,19 @@ const validateAnswer = () => {
   // if question is not last question then increment question index and render next question
 };
 
-const handleClick = (event) => {
+const handleThemeClick = (event) => {
   //event.stopPropagation();
-  const target = event.target;
+  const selectedTheme = event.target.getAttribute("data-text");
+  const questionArray = questions.filter((question) => {
+    return question.theme === selectedTheme;
+  });
+  console.log(questionArray);
+
   // if (target.tagName === "LI") {
   //   const clickedItem = target.getAttribute("data-text");
   //   return clickedItem;
   // }
-  console.log(event.target);
-  return target;
+  console.log(selectedTheme);
 };
 
 const handleFormSubmit = () => {
@@ -253,7 +257,7 @@ const renderQuizCompleteSection = () => {
   // append section to main
 };
 
-const chooseTheme = () => {
+const renderTheme = () => {
   //remove start section
   const startSection = document.getElementById("start-section");
   startSection.remove();
@@ -277,7 +281,7 @@ const chooseTheme = () => {
   //for each theme create li and append to ul
   for (let i = 0; i < themes.length; i += 1) {
     const li = document.createElement("li");
-    li.setAttribute("class", "theme-item");
+    li.setAttribute("class", "theme-item btn");
     li.setAttribute("data-text", themes[i]);
     li.setAttribute("id", themes[i]);
     li.textContent = themes[i];
@@ -298,12 +302,10 @@ const chooseTheme = () => {
   console.log(themeItems);
   console.log(themeItems.length);
   for (let i = 0; i < themeItems.length; i += 1) {
-    themeItems[i].addEventListener("click", handleClick(event));
-    console.log("assigned");
+    themeItems[i].addEventListener("click", handleThemeClick);
   }
-
-  return "css";
 };
+
 const startQuiz = () => {
   // remove theme section
   // start timer
@@ -314,7 +316,7 @@ const startQuiz = () => {
 //main function - take quiz
 const takeQuiz = () => {
   //choose theme
-  const theme = chooseTheme();
+  const theme = renderTheme();
   //start quiz
   //const quizScore = startQuiz(theme, questions);
 
