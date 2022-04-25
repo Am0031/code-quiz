@@ -19,6 +19,7 @@ ul {
 
 body {
   font-family: sans-serif;
+  font-size: 15px;
   background-color: #f9fbfd;
   display: flex;
   flex-direction: column;
@@ -51,6 +52,7 @@ button[disabled] {
 .navbar,
 .footerbar {
   width: 100%;
+  height: 3rem;
 }
 .navbar {
   justify-content: space-around;
@@ -58,11 +60,13 @@ button[disabled] {
 .footerbar {
   justify-content: space-between;
 }
-.navlink {
+.navlink,
+.contact {
   padding: 5px;
   color: var(--link);
 }
-.navlink:hover {
+.navlink:hover,
+.contact:hover {
   font-weight: bold;
   border-bottom: 2px solid var(--link);
 }
@@ -154,10 +158,7 @@ button[disabled] {
     padding: 1rem 0 1rem 0;
   }
 
-  .start-btn,
-  .retry-btn,
-  .list-item,
-  .theme-item {
+  .btn {
     font-size: 1rem;
     margin: 1rem 0 0 0;
     padding: 0.6rem 1rem;
@@ -176,10 +177,7 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
-  .start-btn,
-  .retry.btn,
-  .list-item,
-  .theme-item {
+  .btn {
     font-size: 0.8rem;
   }
   .question-container {
