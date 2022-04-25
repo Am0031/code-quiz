@@ -224,6 +224,25 @@ const handleThemeClick = (event) => {
   }
 };
 
+const handleQuestionClick = (event) => {
+  event.stopPropagation();
+  const currentTarget = event.currentTarget;
+  console.log(currentTarget.tagName);
+  console.log(target.tagName);
+  const target = event.target;
+  if (target.tagName === "LI") {
+    //get the answer from the user
+    const selectedAnswer = target.getAttribute("data-index");
+    console.log(selectedAnswer);
+    //if (){
+    //compare data index to correct index
+    //if true, add 1 to the count of correct answers
+    //else, do nothing
+    //}
+    //go to the next question
+  }
+};
+
 const handleFormSubmit = () => {
   // get value from input
   // check if empty then render error alert with message and status
