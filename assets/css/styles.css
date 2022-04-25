@@ -20,6 +20,12 @@ ul {
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main {
+  flex: 2;
 }
 button[disabled] {
   cursor: default;
