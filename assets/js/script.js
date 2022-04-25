@@ -165,8 +165,10 @@ let quizComplete = false;
 
 const onLoad = () => {
   // initialise local storage
+  //get info from local storage
   // check if highscores exists in LS
-  // if false then set highscores to empty array in LS
+  //if it doesn't exist, set an empty array and stringify as we set it
+  //if it exists, do nothing
 };
 
 // const removeSection = (target) => {
@@ -200,12 +202,22 @@ const validateAnswer = () => {
 
 const handleThemeClick = (event) => {
   //event.stopPropagation();
-  const selectedTheme = event.target.getAttribute("data-text");
-  console.log(selectedTheme);
-  selectedQuestions = questions.filter(
-    (question) => question.theme === selectedTheme
-  );
-  console.log(selectedQuestions);
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+  console.log(currentTarget);
+  console.log(target);
+
+  if (target.tagName === "LI") {
+    //get the answer from the user
+    const selectedTheme = target.getAttribute("data-text");
+    console.log(selectedTheme);
+    selectedQuestions = questions.filter(
+      (question) => question.theme === selectedTheme
+    );
+    console.log(selectedQuestions);
+
+    //go to the next section - question section
+  }
 };
 
 const handleFormSubmit = () => {
@@ -266,6 +278,7 @@ const renderTheme = () => {
   //create div
   const themeDiv = document.createElement("div");
   themeDiv.setAttribute("class", "theme-container");
+  themeDiv.setAttribute("id", "theme-container");
   //create h2
   const h2 = document.createElement("h2");
   h2.setAttribute("class", "title");
@@ -289,16 +302,9 @@ const renderTheme = () => {
   //append section to main
   main.append(themeSelection);
 
-  //add event listener to the list items
-  //const listLength = document.querySelectorAll("theme-item");
-  //console.log(listLength);
-
-  const themeItems = document.querySelectorAll(".theme-item");
-  console.log(themeItems);
-  console.log(themeItems.length);
-  for (let i = 0; i < themeItems.length; i += 1) {
-    themeItems[i].addEventListener("click", handleThemeClick);
-  }
+  //add event listener to the section
+  const themeSection = document.getElementById("theme-container");
+  themeSection.addEventListener("click", handleThemeClick);
 };
 
 const startQuiz = () => {
