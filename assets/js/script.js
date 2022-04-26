@@ -160,7 +160,8 @@ const questions = [
 ];
 let selectedQuestions = [];
 let questionIndex = 0;
-let timerValue = 10 * questions.length;
+let timerValue = 10 * selectedQuestions.length;
+let correctAnswers = 0;
 let quizComplete = false;
 
 const onLoad = () => {
@@ -204,6 +205,49 @@ const validateAnswer = () => {
   // if question is not last question then increment question index and render next question
 };
 
+const renderQuestion = (question) => {
+  //remove theme section
+  // const currentSection =
+  //   document.getElementById("theme-section") ||
+  //   document.getElementById("question-section");
+  // currentSection.remove();
+
+  //render theme section
+
+  //create section
+  const questionSection = document.createElement("section");
+  questionSection.setAttribute("class", "question-section wrapper");
+  questionSection.setAttribute("id", "question-section");
+  //create div
+  const questionDiv = document.createElement("div");
+  questionDiv.setAttribute("class", "question-container");
+  questionDiv.setAttribute("id", "question-container");
+  //create h2
+  const h2 = document.createElement("h2");
+  h2.setAttribute("class", "title");
+  h2.textContent = question.text;
+  //create ul
+  const ul = document.createElement("ul");
+  ul.setAttribute("class", "list");
+  //for each theme create li and append to ul
+  for (let i = 0; i < question.options.length; i += 1) {
+    const li = document.createElement("li");
+    li.setAttribute("class", "list-item btn");
+    li.setAttribute("data-index", i);
+    li.textContent = question.options[i];
+    ul.appendChild(li);
+    console.log(li);
+  }
+  //append children to section
+  questionDiv.append(h2, ul);
+  questionSection.append(questionDiv);
+  //append section to main
+  main.append(questionSection);
+
+  //add event listener on div
+  questionSection.addEventListener("click", handleQuestionClick);
+};
+
 const handleThemeClick = (event) => {
   //event.stopPropagation();
   const target = event.target;
@@ -214,12 +258,13 @@ const handleThemeClick = (event) => {
   if (target.tagName === "LI") {
     //get the answer from the user
     const selectedTheme = target.getAttribute("data-text");
-    console.log(selectedTheme);
     selectedQuestions = questions.filter(
       (question) => question.theme === selectedTheme
     );
     console.log(selectedQuestions);
 
+    currentTarget.remove();
+    renderQuestion(selectedQuestions[questionIndex]);
     //go to the next section - question section
   }
 };
@@ -228,18 +273,28 @@ const handleQuestionClick = (event) => {
   event.stopPropagation();
   const currentTarget = event.currentTarget;
   console.log(currentTarget.tagName);
-  console.log(target.tagName);
+
   const target = event.target;
+  console.log(target.tagName);
   if (target.tagName === "LI") {
     //get the answer from the user
     const selectedAnswer = target.getAttribute("data-index");
     console.log(selectedAnswer);
-    //if (){
     //compare data index to correct index
-    //if true, add 1 to the count of correct answers
+
+    if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
+      //add 1 to the count of correct answers
+      correctAnswers += 1;
+    }
     //else, do nothing
-    //}
-    //go to the next question
+    currentTarget.remove();
+    //increase question index by 1 + go to the next question
+    if (questionIndex < selectedQuestions.length - 1) {
+      questionIndex += 1;
+      renderQuestion(selectedQuestions[questionIndex]);
+    } else {
+      renderForm();
+    }
   }
 };
 
@@ -258,12 +313,6 @@ const handleFormSubmit = () => {
 const renderTimerSection = () => {
   // use HTML as guide and build in JS
   // append section to main
-};
-
-const renderQuestionSection = () => {
-  // use HTML as guide and build in JS
-  // append section to main
-  // add click event listener on #question-section
 };
 
 const renderGameOver = () => {
@@ -325,9 +374,8 @@ const renderTheme = () => {
   //append section to main
   main.append(themeSelection);
 
-  //add event listener to the section
-  const themeSection = document.getElementById("theme-container");
-  themeSection.addEventListener("click", handleThemeClick);
+  //const section = document.getElementById(themeDiv);
+  themeSelection.addEventListener("click", handleThemeClick);
 };
 
 const startQuiz = () => {
@@ -339,9 +387,13 @@ const startQuiz = () => {
 
 //main function - take quiz
 const takeQuiz = () => {
+  //render theme selection
+  renderTheme();
+
   //choose theme
-  const theme = renderTheme();
+
   //start quiz
+
   //const quizScore = startQuiz(theme, questions);
 
   //validate answer
