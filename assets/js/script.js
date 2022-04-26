@@ -182,17 +182,27 @@ const onLoad = () => {
 //   const section = document.getElementById(target);
 //   section.remove();
 // };
+const timerSpan = document.getElementById("timer-span");
 
 const startTimer = () => {
   // declare function to execute every 1 sec
   const countdown = () => {
-    // decrement timer value
-    // if quizComplete is true then stop timer
+    // target timer span -> outside of function
+    //decrement timer value
+    timerValue -= 1;
+
+    //set text as new value
+    timerSpan.textContent = timerValue;
     // check if timer reaches 0
-    // if true render game over
+    if (timerValue === 0) {
+      clearInterval(timerId);
+      renderForm();
+    }
+    // if quizComplete is true then stop timer
   };
 
   // setInterval of 1000ms (1s)
+  const timerId = setInterval(countdown, 1000);
 };
 
 const validateAnswer = () => {
