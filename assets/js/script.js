@@ -165,7 +165,7 @@ let correctAnswers = 0;
 let quizComplete = false;
 
 const onLoad = () => {
-  // initialise local storage
+  // function to initialise local storage
   //get info from local storage
   const highScoresFromLS = JSON.parse(localStorage.getItem(highscores));
   console.log(highScoresFromLS);
@@ -204,100 +204,6 @@ const validateAnswer = () => {
   // if question is last question set quizComplete to true and then render form
   // if question is not last question then increment question index and render next question
 };
-
-const renderQuestion = (question) => {
-  //remove theme section
-  // const currentSection =
-  //   document.getElementById("theme-section") ||
-  //   document.getElementById("question-section");
-  // currentSection.remove();
-
-  //render theme section
-
-  //create section
-  const questionSection = document.createElement("section");
-  questionSection.setAttribute("class", "question-section wrapper");
-  questionSection.setAttribute("id", "question-section");
-  //create div
-  const questionDiv = document.createElement("div");
-  questionDiv.setAttribute("class", "question-container");
-  questionDiv.setAttribute("id", "question-container");
-  //create h2
-  const h2 = document.createElement("h2");
-  h2.setAttribute("class", "title");
-  h2.textContent = question.text;
-  //create ul
-  const ul = document.createElement("ul");
-  ul.setAttribute("class", "list");
-  //for each theme create li and append to ul
-  for (let i = 0; i < question.options.length; i += 1) {
-    const li = document.createElement("li");
-    li.setAttribute("class", "list-item btn");
-    li.setAttribute("data-index", i);
-    li.textContent = question.options[i];
-    ul.appendChild(li);
-    console.log(li);
-  }
-  //append children to section
-  questionDiv.append(h2, ul);
-  questionSection.append(questionDiv);
-  //append section to main
-  main.append(questionSection);
-
-  //add event listener on div
-  questionSection.addEventListener("click", handleQuestionClick);
-};
-
-const handleThemeClick = (event) => {
-  //event.stopPropagation();
-  const target = event.target;
-  const currentTarget = event.currentTarget;
-  console.log(currentTarget);
-  console.log(target);
-
-  if (target.tagName === "LI") {
-    //get the answer from the user
-    const selectedTheme = target.getAttribute("data-text");
-    selectedQuestions = questions.filter(
-      (question) => question.theme === selectedTheme
-    );
-    console.log(selectedQuestions);
-
-    currentTarget.remove();
-    renderQuestion(selectedQuestions[questionIndex]);
-    //go to the next section - question section
-  }
-};
-
-const handleQuestionClick = (event) => {
-  event.stopPropagation();
-  const currentTarget = event.currentTarget;
-  console.log(currentTarget.tagName);
-
-  const target = event.target;
-  console.log(target.tagName);
-  if (target.tagName === "LI") {
-    //get the answer from the user
-    const selectedAnswer = target.getAttribute("data-index");
-    console.log(selectedAnswer);
-    //compare data index to correct index
-
-    if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
-      //add 1 to the count of correct answers
-      correctAnswers += 1;
-    }
-    //else, do nothing
-    currentTarget.remove();
-    //increase question index by 1 + go to the next question
-    if (questionIndex < selectedQuestions.length - 1) {
-      questionIndex += 1;
-      renderQuestion(selectedQuestions[questionIndex]);
-    } else {
-      renderForm();
-    }
-  }
-};
-
 const handleFormSubmit = () => {
   // get value from input
   // check if empty then render error alert with message and status
@@ -334,6 +240,112 @@ const renderForm = () => {
 const renderQuizCompleteSection = () => {
   // use HTML as guide and build in JS
   // append section to main
+};
+
+const handleQuestionClick = (event) => {
+  event.stopPropagation();
+  const currentTarget = event.currentTarget;
+  console.log(currentTarget.tagName);
+
+  const target = event.target;
+  console.log(target.tagName);
+  if (target.tagName === "LI") {
+    //get the answer from the user
+    const selectedAnswer = target.getAttribute("data-index");
+    console.log(selectedAnswer);
+    //compare data index to correct index
+
+    if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
+      //add 1 to the count of correct answers
+      correctAnswers += 1;
+    }
+    //else, do nothing
+    currentTarget.remove();
+    //increase question index by 1 + go to the next question
+    if (questionIndex < selectedQuestions.length - 1) {
+      questionIndex += 1;
+      renderQuestion(selectedQuestions[questionIndex]);
+    } else {
+      renderForm();
+    }
+  }
+};
+
+const renderQuestion = (question) => {
+  //render theme section
+
+  //create section
+  const questionSection = document.createElement("section");
+  questionSection.setAttribute("class", "question-section wrapper");
+  questionSection.setAttribute("id", "question-section");
+  //create div
+  const questionDiv = document.createElement("div");
+  questionDiv.setAttribute("class", "question-container");
+  questionDiv.setAttribute("id", "question-container");
+  //create h2
+  const h2 = document.createElement("h2");
+  h2.setAttribute("class", "title");
+  h2.textContent = question.text;
+  //create ul
+  const ul = document.createElement("ul");
+  ul.setAttribute("class", "list");
+  //for each theme create li and append to ul
+  for (let i = 0; i < question.options.length; i += 1) {
+    const li = document.createElement("li");
+    li.setAttribute("class", "list-item btn");
+    li.setAttribute("data-index", i);
+    li.textContent = question.options[i];
+    ul.appendChild(li);
+    console.log(li);
+  }
+  //append children to section
+  questionDiv.append(h2, ul);
+
+  const statusDiv = document.createElement("div");
+  statusDiv.setAttribute("class", "status-container");
+  const progressBar = document.createElement("progress");
+  progressBar.setAttribute("class", "progress-bar");
+  progressBar.setAttribute("id", "progress-bar");
+  progressBar.setAttribute("max", selectedQuestions.length);
+  progressBar.setAttribute("value", correctAnswers);
+  const p = document.createElement("p");
+  p.setAttribute("class", "correct-status");
+  p.setAttribute("id", "correct-status");
+  p.text = `Correct answers : ${progressBar.value} / ${progressBar.max}`;
+  statusDiv.append(progressBar, p);
+
+  //append both divs to question section
+  questionSection.append(questionDiv, statusDiv);
+
+  //append question section to main
+  main.append(questionSection);
+
+  //add event listener on div
+  questionSection.addEventListener("click", handleQuestionClick);
+};
+
+const handleThemeClick = (event) => {
+  //event.stopPropagation();
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+  console.log(currentTarget);
+  console.log(target);
+
+  if (target.tagName === "LI") {
+    //get the answer from the user
+    const selectedTheme = target.getAttribute("data-text");
+    selectedQuestions = questions.filter(
+      (question) => question.theme === selectedTheme
+    );
+    console.log(selectedQuestions);
+
+    //remove the current section displayed
+    currentTarget.remove();
+    //calls the function to render the relevant section
+    renderTimerSection(timerValue);
+    renderQuestion(selectedQuestions[questionIndex]);
+    //go to the next section - question section
+  }
 };
 
 const renderTheme = () => {
@@ -376,13 +388,6 @@ const renderTheme = () => {
 
   //const section = document.getElementById(themeDiv);
   themeSelection.addEventListener("click", handleThemeClick);
-};
-
-const startQuiz = () => {
-  // remove theme section
-  // start timer
-  // render timer section
-  // render question section
 };
 
 //main function - take quiz
