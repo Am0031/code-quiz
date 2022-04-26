@@ -165,6 +165,7 @@ let timerValue = 10 * selectedQuestions.length;
 let correctAnswers = 0;
 let quizComplete = false;
 let score = 0;
+const highScores = [];
 
 const onLoad = () => {
   // function to initialise local storage
@@ -235,8 +236,8 @@ const renderTimerSection = () => {
   timerSection.setAttribute("id", "timer-section");
   const timerDivTheme = document.createElement("div");
   const p1 = document.createElement("p");
-  p.setAttribute("class", "theme-display");
-  p.textContent = `Quiz - Theme : ${selectedTheme}`;
+  p1.setAttribute("class", "theme-display");
+  p1.textContent = `Quiz - Theme : ${selectedTheme}`;
   timerDivTheme.append(p1);
 
   const timerDivNum = document.createElement("div");
@@ -372,7 +373,9 @@ const handleThemeClick = (event) => {
     selectedQuestions = questions.filter(
       (question) => question.theme === selectedTheme
     );
+    timerValue = 10 * selectedQuestions.length;
     console.log(selectedQuestions);
+    console.log(timerValue);
 
     //remove the current section displayed
     currentTarget.remove();
