@@ -254,10 +254,11 @@ const handleQuestionClick = (event) => {
     const selectedAnswer = target.getAttribute("data-index");
     console.log(selectedAnswer);
     //compare data index to correct index
-
-    if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
+    console.log(selectedQuestions[questionIndex].correctIndex);
+    if (selectedAnswer == selectedQuestions[questionIndex].correctIndex) {
       //add 1 to the count of correct answers
       correctAnswers += 1;
+      console.log(correctAnswers);
     }
     //else, do nothing
     currentTarget.remove();
@@ -307,11 +308,11 @@ const renderQuestion = (question) => {
   progressBar.setAttribute("class", "progress-bar");
   progressBar.setAttribute("id", "progress-bar");
   progressBar.setAttribute("max", selectedQuestions.length);
-  progressBar.setAttribute("value", correctAnswers);
+  progressBar.setAttribute("value", questionIndex);
   const p = document.createElement("p");
   p.setAttribute("class", "correct-status");
   p.setAttribute("id", "correct-status");
-  p.textContent = `Correct answers : ${progressBar.value} / ${progressBar.max}`;
+  p.textContent = `Correct answers : ${correctAnswers} / ${progressBar.max}`;
   statusDiv.append(progressBar, p);
 
   //append both divs to question section
