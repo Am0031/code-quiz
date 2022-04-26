@@ -158,11 +158,13 @@ const questions = [
     correctIndex: 2,
   },
 ];
+let selectedTheme = "";
 let selectedQuestions = [];
 let questionIndex = 0;
 let timerValue = 10 * selectedQuestions.length;
 let correctAnswers = 0;
 let quizComplete = false;
+let score = 0;
 
 const onLoad = () => {
   // function to initialise local storage
@@ -217,8 +219,29 @@ const handleFormSubmit = () => {
 };
 
 const renderTimerSection = () => {
-  // use HTML as guide and build in JS
+  // create section
+  const timerSection = document.createElement("section");
+  timerSection.setAttribute("class", "timer-section box-row");
+  timerSection.setAttribute("id", "timer-section");
+  const timerDivTheme = document.createElement("div");
+  const p1 = document.createElement("p");
+  p.setAttribute("class", "theme-display");
+  p.textContent = `Quiz - Theme : ${selectedTheme}`;
+  timerDivTheme.append(p1);
+
+  const timerDivNum = document.createElement("div");
+  timerDivNum.setAttribute("class", "timer-display box-row");
+  const p2 = document.createElement("p");
+  p2.setAttribute("class", "timer-item");
+  p2.textContent = "Time remaining : ";
+  const span = document.createElement("span");
+  span.setAttribute("class", "timer-item");
+  span.setAttribute("id", "timer-span");
+  span.textContent = ` ${timerValue} `;
   // append section to main
+  timerDivNum.append(p2, span);
+  timerSection.append(timerDivTheme, timerDivNum);
+  main.append(timerSection);
 };
 
 const renderGameOver = () => {
@@ -267,13 +290,14 @@ const handleQuestionClick = (event) => {
       questionIndex += 1;
       renderQuestion(selectedQuestions[questionIndex]);
     } else {
-      renderForm();
+      score = timerValue;
+      renderForm(score);
     }
   }
 };
 
 const renderQuestion = (question) => {
-  //render theme section
+  //render question section
 
   //create section
   const questionSection = document.createElement("section");
@@ -334,7 +358,7 @@ const handleThemeClick = (event) => {
 
   if (target.tagName === "LI") {
     //get the answer from the user
-    const selectedTheme = target.getAttribute("data-text");
+    selectedTheme = target.getAttribute("data-text");
     selectedQuestions = questions.filter(
       (question) => question.theme === selectedTheme
     );
