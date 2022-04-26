@@ -169,7 +169,7 @@ let score = 0;
 const onLoad = () => {
   // function to initialise local storage
   //get info from local storage
-  const highScoresFromLS = JSON.parse(localStorage.getItem(highscores));
+  const highScoresFromLS = JSON.parse(localStorage.getItem(highScores));
   console.log(highScoresFromLS);
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
@@ -448,6 +448,8 @@ const takeQuiz = () => {
   //goToHome();
 };
 
+//set page load
+window.addEventListener("load", onLoad);
 // add event listener to start button
 const startBtn = document.querySelector("#start-btn");
 startBtn.addEventListener("click", takeQuiz);
