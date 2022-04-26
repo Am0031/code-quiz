@@ -311,7 +311,7 @@ const renderQuestion = (question) => {
   const p = document.createElement("p");
   p.setAttribute("class", "correct-status");
   p.setAttribute("id", "correct-status");
-  p.text = `Correct answers : ${progressBar.value} / ${progressBar.max}`;
+  p.textContent = `Correct answers : ${progressBar.value} / ${progressBar.max}`;
   statusDiv.append(progressBar, p);
 
   //append both divs to question section
