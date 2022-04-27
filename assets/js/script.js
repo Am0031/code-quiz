@@ -462,14 +462,11 @@ const handleQuestionClick = (event) => {
   if (target.tagName === "LI") {
     //get the answer from the user
     const selectedAnswer = parseInt(target.getAttribute("data-index"));
-    console.log(selectedAnswer);
-    console.log(correctAnswers);
+
     //compare data index to correct index
     if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
       //add 1 to the count of correct answers
       correctAnswers += 1;
-      console.log(selectedQuestions[questionIndex].correctIndex);
-      console.log(correctAnswers);
     } else {
       timerValue -= 5;
     }
@@ -616,7 +613,7 @@ const renderTheme = () => {
   themeSelection.addEventListener("click", handleThemeClick);
 };
 
-//main function - take quiz
+//main function - take quiz (+summary notes for general logic)
 const takeQuiz = () => {
   //render theme selection
   renderTheme();
