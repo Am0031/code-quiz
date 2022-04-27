@@ -165,7 +165,8 @@ let timerValue = 10 * selectedQuestions.length;
 let correctAnswers = 0;
 let quizComplete = false;
 let score = 0;
-const highScores = [];
+let highScores = [];
+const localStorageKey = "highScores";
 
 const onLoad = () => {
   // function to initialise local storage
@@ -175,9 +176,9 @@ const onLoad = () => {
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
   if (!highScoresFromLS) {
-    localStorage.setItem("highScores", JSON.stringify([]));
-    console.log(highScores);
+    localStorage.setItem(localStorageKey, JSON.stringify([]));
   }
+  console.log(JSON.parse(localStorage.getItem(highScores)));
 };
 
 // const removeSection = (target) => {
@@ -218,16 +219,38 @@ const validateAnswer = () => {
   // if question is last question set quizComplete to true and then render form
   // if question is not last question then increment question index and render next question
 };
-const handleFormSubmit = () => {
+const handleFormSubmit = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  const currentTarget = event.currentTarget;
   // get value from input
+  const initials = document.getElementById("input-field").value;
+  console.log(initials);
+  console.log(score);
   // check if empty then render error alert with message and status
+  if (!initials) {
+    alert("Please enter your initials to save your score");
+  }
   // if not empty then create the score object
-  // {
-  //   fullName: "Bob Smith",
-  //   score: 25
-  // }
-  // push score object to LS
-  // render quizCompleteSection
+  else {
+    const newHighScore = {
+      initials,
+      score,
+    };
+
+    highScores = JSON.parse(localStorage.getItem(localStorageKey));
+    console.log(highScores);
+    // push new score object into array
+    highScores.push(newHighScore);
+    console.log(highScores);
+    // push updated array to LS
+    localStorage.setItem(localStorageKey, JSON.stringify(highScores));
+
+    // remove form section
+    currentTarget.remove();
+    // render quizComplete section
+    renderQuizCompleteSection();
+  }
 };
 
 const renderTimerSection = () => {
@@ -301,6 +324,7 @@ const renderForm = () => {
   label1.textContent = "Enter your initials";
   const input = document.createElement("input");
   input.setAttribute("class", "input-field");
+  input.setAttribute("id", "input-field");
   input.setAttribute("type", "text");
   input.setAttribute("aria-label", "enter your initials");
   inputDiv.append(label1, input);
@@ -341,26 +365,23 @@ const renderForm = () => {
   // append section to main
   main.append(formSection);
   // add submit event handler to form
-  formSection.addEventListener("click", handleFormSubmit);
+  formSection.addEventListener("submit", handleFormSubmit);
 };
 
 const handleQuestionClick = (event) => {
   event.stopPropagation();
   const currentTarget = event.currentTarget;
-  console.log(currentTarget.tagName);
 
   const target = event.target;
-  console.log(target.tagName);
+
   if (target.tagName === "LI") {
     //get the answer from the user
     const selectedAnswer = target.getAttribute("data-index");
-    console.log(selectedAnswer);
+
     //compare data index to correct index
-    console.log(selectedQuestions[questionIndex].correctIndex);
     if (selectedAnswer == selectedQuestions[questionIndex].correctIndex) {
       //add 1 to the count of correct answers
       correctAnswers += 1;
-      console.log(correctAnswers);
     }
     //else, do nothing
     currentTarget.remove();
@@ -400,7 +421,6 @@ const renderQuestion = (question) => {
     li.setAttribute("data-index", i);
     li.textContent = question.options[i];
     ul.appendChild(li);
-    console.log(li);
   }
   //append children to section
   questionDiv.append(h2, ul);
