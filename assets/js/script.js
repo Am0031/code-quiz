@@ -302,7 +302,7 @@ const renderQuizCompleteSection = () => {
   h2.textContent = "Take the code quiz challenge again!";
   // create paragraph
   const p = document.createElement("p");
-  p.setAttribute("class", "alert-container");
+  p.setAttribute("class", "message-container");
   p.textContent = "Thanks for taking the quiz. Do you want to try again?";
   //create links
   const aHome = document.createElement("a");
@@ -338,13 +338,42 @@ const renderForm = () => {
   h2.setAttribute("class", "title");
   h2.textContent = "Let's save your score!";
 
-  // create paragraph
-  const alertDiv1 = document.createElement("div");
-  alertDiv1.setAttribute("class", "alert-container");
-  alertDiv1.innerHTML = `<p>Your result: </p>
-  <p>You just took the ${selectedTheme} quiz and answered ${correctAnswers} questions correctly
-  out of ${selectedQuestions.length}.</p>
-  <p>You scored ${score}.</p>`;
+  const p = document.createElement("div");
+  p.setAttribute("class", "message-container");
+  p.textContent = "Your quiz summary:";
+  // create small score table
+  const table = document.createElement("table");
+  table.setAttribute("class", "score-table");
+  const row1 = document.createElement("tr");
+  const row1Data1 = document.createElement("td");
+  row1Data1.innerHTML = "Theme";
+  const row1Data2 = document.createElement("td");
+  row1Data2.innerHTML = selectedTheme;
+  row1.append(row1Data1, row1Data2);
+
+  const row2 = document.createElement("tr");
+  const row2Data1 = document.createElement("td");
+  row2Data1.innerHTML = "Total number of questions";
+  const row2Data2 = document.createElement("td");
+  row2Data2.innerHTML = selectedQuestions.length;
+  row2.append(row2Data1, row2Data2);
+
+  const row3 = document.createElement("tr");
+  const row3Data1 = document.createElement("td");
+  row3Data1.innerHTML = "Number of correct answers";
+  const row3Data2 = document.createElement("td");
+  row3Data2.innerHTML = correctAnswers;
+  row3.append(row3Data1, row3Data2);
+
+  const row4 = document.createElement("tr");
+  const row4Data1 = document.createElement("td");
+  row4Data1.innerHTML = "Your score";
+  const row4Data2 = document.createElement("td");
+  row4Data2.innerHTML = score;
+  row4.append(row4Data1, row4Data2);
+
+  //append rows to table
+  table.append(row1, row2, row3, row4);
 
   //create div for input label and text field
   const inputDiv = document.createElement("div");
@@ -353,7 +382,7 @@ const renderForm = () => {
   const label1 = document.createElement("label");
   label1.setAttribute("class", "input-label");
   label1.setAttribute("for", "input");
-  label1.textContent = "Enter your initials";
+  label1.textContent = "Enter your full name";
   const input = document.createElement("input");
   input.setAttribute("class", "input-field");
   input.setAttribute("id", "input-field");
@@ -369,13 +398,6 @@ const renderForm = () => {
   label2.setAttribute("class", "score-label");
   label2.setAttribute("for", "text-area");
   label2.textContent = "Your score";
-  const scoreField = document.createElement("textArea");
-  scoreField.setAttribute("class", "score-field");
-  scoreField.setAttribute("id", "score-field");
-  scoreField.setAttribute("aria-label", "your score");
-  scoreField.setAttribute("readonly", true);
-  scoreField.textContent = `${score}`;
-  scoreDiv.append(label2, scoreField);
 
   // create div for submit button
   const buttonDiv = document.createElement("div");
@@ -384,16 +406,11 @@ const renderForm = () => {
   submitButton.setAttribute("class", "submit-btn btn");
   submitButton.setAttribute("type", "submit");
   submitButton.setAttribute("id", "submit");
-  submitButton.textContent = "Continue";
+  submitButton.textContent = "Submit";
   buttonDiv.append(submitButton);
 
-  // create div for displaying alert message regarding 0 score
-  const alertDiv2 = document.createElement("div");
-  alertDiv2.setAttribute("class", "alert-container");
-  alertDiv2.textContent =
-    "You need to score above 0 for your score to be saved in the high scores tables";
   //append all divs to form
-  form.append(h2, alertDiv1, inputDiv, scoreDiv, buttonDiv, alertDiv2);
+  form.append(h2, p, table, inputDiv, scoreDiv, buttonDiv);
   //append form to form section
   formSection.append(form);
   // append form section to main

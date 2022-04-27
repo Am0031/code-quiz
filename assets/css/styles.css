@@ -135,7 +135,7 @@ button[disabled] {
 }
 
 .form-container {
-  width: 60%;
+  width: 70%;
 }
 .input-container,
 .score-container {
@@ -150,7 +150,7 @@ button[disabled] {
 .score-field {
   flex-grow: 1;
 }
-.alert-container {
+.message-container {
   text-align: center;
   margin: 1rem 0;
 }
@@ -158,6 +158,19 @@ button[disabled] {
 .submit-button-container {
   justify-content: center;
   width: 100%;
+}
+
+.score-table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+.score-table th, .score-table td{
+    padding: 0.5rem 1rem;
+    border: 1px solid #000;
+}
 }
 
 /*media queries*/
