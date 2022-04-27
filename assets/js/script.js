@@ -334,7 +334,7 @@ const renderForm = () => {
   // create paragraph
   const p1 = document.createElement("p");
   p1.setAttribute("class", "alert-container");
-  p1.textContent = `Your result: <br />
+  p1.innerHTML = `Your result: <br />
   You just took the ${selectedTheme} quiz and answered ${correctAnswers} questions correctly
   out of ${selectedQuestions.length}. <br />
   You scored ${score}.`;
