@@ -197,9 +197,11 @@ const startTimer = () => {
       document.getElementById("timer-section").remove();
     } else {
       // check if timer reaches 0
-      if (timerValue === 0) {
+      if (timerValue <= 0) {
         clearInterval(timerId);
         score = 0;
+        document.getElementById("timer-section").remove();
+        document.getElementById("question-section").remove();
         renderForm(score);
       }
     }
@@ -407,6 +409,8 @@ const handleQuestionClick = (event) => {
     if (selectedAnswer == selectedQuestions[questionIndex].correctIndex) {
       //add 1 to the count of correct answers
       correctAnswers += 1;
+    } else {
+      timerValue -= 5;
     }
 
     //remove the current section displayed
@@ -554,22 +558,24 @@ const takeQuiz = () => {
   //render theme selection
   renderTheme();
 
-  //choose theme
+  //choose theme --> from renderTheme goes to handleThemeClick
 
-  //start quiz
+  //start questions --> from handleThemeClick goes to renderQuestion and renderTimer/startTimer
 
-  //const quizScore = startQuiz(theme, questions);
+  //choose answer --> with event listener in renderQuestion goes to handleQuestionClick
 
-  //validate answer
+  //validate answer --> in handleQuestionClick
+
   //continue quiz + continue validating answers
-  //move to score page on quiz completion
-  //const score = renderForm(quizScore);
+  // --> from handleQuestionClick goes to renderQuestion, and on click back to handleQuestionClick
 
-  //submit score
-  //submitForm(score, input);
+  //move to form on quiz completion --> from handleQuestionClick goes to renderForm
 
-  //go back to the home page
-  //goToHome();
+  //submit score --> with submit event listener in renderForm goes to handleFormSubmit
+
+  //go to quiz complete page --> from handleFormSubmit goes to renderQuizCompleteSection
+
+  //retry --> link to home page
 };
 
 //set page load
