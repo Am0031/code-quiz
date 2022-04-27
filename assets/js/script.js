@@ -172,13 +172,12 @@ const onLoad = () => {
   // function to initialise local storage
   //get info from local storage
   const highScoresFromLS = JSON.parse(localStorage.getItem(localStorageKey));
-  console.log(highScoresFromLS);
+
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
   if (!highScoresFromLS) {
     localStorage.setItem(localStorageKey, JSON.stringify([]));
   }
-  console.log(JSON.parse(localStorage.getItem(localStorageKey)));
 };
 
 const startTimer = () => {
