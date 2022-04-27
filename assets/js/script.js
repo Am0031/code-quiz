@@ -167,7 +167,6 @@ let quizComplete = false;
 let score = 0;
 let highScores = [];
 const localStorageKey = "highScores";
-let timerSpan = document.getElementById("timer-span");
 
 const onLoad = () => {
   // function to initialise local storage
@@ -183,6 +182,8 @@ const onLoad = () => {
 };
 
 const startTimer = () => {
+  // declare variable for timer span
+  const timerSpan = document.getElementById("timer-span");
   // declare function to execute every 1 sec
   const countdown = () => {
     // target timer span -> done outside of function
@@ -198,7 +199,7 @@ const startTimer = () => {
       // check if timer reaches 0
       if (timerValue === 0) {
         clearInterval(timerId);
-        score = timerValue;
+        score = 0;
         renderForm(score);
       }
     }
@@ -255,9 +256,6 @@ const handleFormSubmit = (event) => {
 };
 
 const renderTimerSection = () => {
-  //start the timer
-  startTimer(timerValue);
-
   // create section
   const timerSection = document.createElement("section");
   timerSection.setAttribute("class", "timer-section box-row");
@@ -286,6 +284,9 @@ const renderTimerSection = () => {
   timerSection.append(timerDivTheme, timerDivNum);
   // append section to main
   main.append(timerSection);
+
+  //start the timer
+  startTimer(timerValue);
 };
 
 const renderQuizCompleteSection = () => {
