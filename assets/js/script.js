@@ -302,15 +302,22 @@ const renderQuizCompleteSection = () => {
   h2.textContent = "Take the code quiz challenge again!";
   // create paragraph
   const p = document.createElement("p");
+  p.setAttribute("class", "alert-container");
   p.textContent = "Thanks for taking the quiz. Do you want to try again?";
-  const a = document.createElement("a");
-  a.setAttribute("class", "btn retry-btn link");
-  a.setAttribute("id", "retry-btn");
-  a.setAttribute("href", "./index.html");
-  a.textContent = "Retry";
+  //create links
+  const aHome = document.createElement("a");
+  aHome.setAttribute("class", "btn retry-btn link");
+  aHome.setAttribute("id", "retry-btn");
+  aHome.setAttribute("href", "./index.html");
+  aHome.textContent = "Retry";
+  const aScores = document.createElement("a");
+  aScores.setAttribute("class", "btn scores-btn link");
+  aScores.setAttribute("id", "scores-btn");
+  aScores.setAttribute("href", "./scores.html");
+  aScores.textContent = "Go to High Scores";
 
   // append children to section
-  endSection.append(h2, p, a);
+  endSection.append(h2, p, aHome, aScores);
   // append section to main
   main.append(endSection);
 };
