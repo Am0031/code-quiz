@@ -1,6 +1,9 @@
 /*General style for the page*/
 :root {
   --link: rgb(94, 8, 175);
+  --button: rgb(94, 8, 175);
+  --body: #f9fbfd;
+  --background: hsl(266, 26%, 95%);
 }
 *,
 *::before,
@@ -20,7 +23,7 @@ ul {
 body {
   font-family: sans-serif;
   font-size: 15px;
-  background-color: #f9fbfd;
+  background-color: var(--body);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -30,7 +33,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url();
+  background-image: url("../images/code-quiz-banner.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 button[disabled] {
   cursor: default;
@@ -51,7 +56,7 @@ button[disabled] {
   justify-content: center;
   align-items: center;
   height: 3rem;
-  background-color: hsl(266, 26%, 95%);
+  background-color: var(--background);
 }
 .navbar,
 .footerbar {
@@ -82,13 +87,14 @@ button[disabled] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--body);
 }
 
 .btn {
   border: none;
-  background-color: rgb(94, 8, 175);
+  background-color: var(--button);
   border-radius: 25px;
-  color: hsl(0, 0%, 100%);
+  color: var(--background);
   font-size: 16px;
   line-height: 16px;
   margin: 1rem 3rem;
