@@ -167,6 +167,7 @@ let quizComplete = false;
 let score = 0;
 let highScores = [];
 const localStorageKey = "highScores";
+let timerSpan = document.getElementById("timer-span");
 
 const onLoad = () => {
   // function to initialise local storage
@@ -181,27 +182,26 @@ const onLoad = () => {
   console.log(JSON.parse(localStorage.getItem(highScores)));
 };
 
-// const removeSection = (target) => {
-//   const section = document.getElementById(target);
-//   section.remove();
-// };
-const timerSpan = document.getElementById("timer-span");
-
 const startTimer = () => {
   // declare function to execute every 1 sec
   const countdown = () => {
-    // target timer span -> outside of function
+    // target timer span -> done outside of function
     //decrement timer value
     timerValue -= 1;
-
-    //set text as new value
+    //set text in timer span as new value
     timerSpan.textContent = timerValue;
-    // check if timer reaches 0
-    if (timerValue === 0) {
+    // check if quiz is complete
+    if (quizComplete) {
       clearInterval(timerId);
-      renderForm();
+      document.getElementById("timer-section").remove();
+    } else {
+      // check if timer reaches 0
+      if (timerValue === 0) {
+        clearInterval(timerId);
+        score = timerValue;
+        renderForm(score);
+      }
     }
-    // if quizComplete is true then stop timer
   };
 
   // setInterval of 1000ms (1s)
@@ -219,6 +219,7 @@ const validateAnswer = () => {
   // if question is last question set quizComplete to true and then render form
   // if question is not last question then increment question index and render next question
 };
+
 const handleFormSubmit = (event) => {
   event.stopPropagation();
   event.preventDefault();
@@ -233,19 +234,19 @@ const handleFormSubmit = (event) => {
   }
   // if not empty then create the score object
   else {
-    const newHighScore = {
-      initials,
-      score,
-    };
-
-    highScores = JSON.parse(localStorage.getItem(localStorageKey));
-    console.log(highScores);
-    // push new score object into array
-    highScores.push(newHighScore);
-    console.log(highScores);
-    // push updated array to LS
-    localStorage.setItem(localStorageKey, JSON.stringify(highScores));
-
+    if (score) {
+      const newHighScore = {
+        initials,
+        score,
+      };
+      highScores = JSON.parse(localStorage.getItem(localStorageKey));
+      console.log(highScores);
+      // push new score object into array
+      highScores.push(newHighScore);
+      console.log(highScores);
+      // push updated array to LS
+      localStorage.setItem(localStorageKey, JSON.stringify(highScores));
+    }
     // remove form section
     currentTarget.remove();
     // render quizComplete section
@@ -254,16 +255,22 @@ const handleFormSubmit = (event) => {
 };
 
 const renderTimerSection = () => {
+  //start the timer
+  startTimer(timerValue);
+
   // create section
   const timerSection = document.createElement("section");
   timerSection.setAttribute("class", "timer-section box-row");
   timerSection.setAttribute("id", "timer-section");
+
+  // create div for theme name
   const timerDivTheme = document.createElement("div");
   const p1 = document.createElement("p");
   p1.setAttribute("class", "theme-display");
   p1.textContent = `Quiz - Theme : ${selectedTheme}`;
   timerDivTheme.append(p1);
 
+  // create div for timer number
   const timerDivNum = document.createElement("div");
   timerDivNum.setAttribute("class", "timer-display box-row");
   const p2 = document.createElement("p");
@@ -273,25 +280,36 @@ const renderTimerSection = () => {
   span.setAttribute("class", "timer-item");
   span.setAttribute("id", "timer-span");
   span.textContent = ` ${timerValue} `;
-  // append section to main
+
+  // append divs to section
   timerDivNum.append(p2, span);
   timerSection.append(timerDivTheme, timerDivNum);
+  // append section to main
   main.append(timerSection);
 };
 
-const renderGameOver = () => {
-  // use HTML as guide and build in JS
-  // append section to main
-};
-
 const renderQuizCompleteSection = () => {
-  // use HTML as guide and build in JS
-  // append section to main
-};
+  // create section
+  const endSection = document.createElement("section");
+  endSection.setAttribute("class", "end-section wrapper");
+  endSection.setAttribute("id", "end-section");
+  // create h2
+  const h2 = document.createElement("h2");
+  h2.setAttribute("class", "title");
+  h2.textContent = "Take the code quiz challenge again!";
+  // create paragraph
+  const p = document.createElement("p");
+  p.textContent = "Thanks for taking the quiz. Do you want to try again?";
+  const a = document.createElement("a");
+  a.setAttribute("class", "btn retry-btn link");
+  a.setAttribute("id", "retry-btn");
+  a.setAttribute("href", "./index.html");
+  a.textContent = "Retry";
 
-const renderAlert = (message, status) => {
-  // use HTML as guide and build in JS
-  // append div to #question-section
+  // append children to section
+  endSection.append(h2, p, a);
+  // append section to main
+  main.append(endSection);
 };
 
 const renderForm = () => {
@@ -300,14 +318,17 @@ const renderForm = () => {
   formSection.setAttribute("class", "form-section wrapper");
   formSection.setAttribute("id", "form-section");
 
+  // create form
   const form = document.createElement("form");
   form.setAttribute("class", "form-container");
   form.setAttribute("id", "form-container");
 
+  //create h2
   const h2 = document.createElement("h2");
   h2.setAttribute("class", "title");
   h2.textContent = "Let's save your score!";
 
+  // create paragraph
   const p1 = document.createElement("p");
   p1.setAttribute("class", "alert-container");
   p1.textContent = `Your result: <br />
@@ -315,6 +336,7 @@ const renderForm = () => {
   out of ${selectedQuestions.length}. <br />
   You scored ${score}.`;
 
+  //create div for input label and text field
   const inputDiv = document.createElement("div");
   inputDiv.setAttribute("class", "input-container box-row");
   inputDiv.setAttribute("id", "input-container");
@@ -329,6 +351,7 @@ const renderForm = () => {
   input.setAttribute("aria-label", "enter your initials");
   inputDiv.append(label1, input);
 
+  // create div for score label and text area containing score
   const scoreDiv = document.createElement("div");
   scoreDiv.setAttribute("class", "score-container box-row");
   scoreDiv.setAttribute("id", "score-container");
@@ -344,6 +367,7 @@ const renderForm = () => {
   scoreField.textContent = `${score}`;
   scoreDiv.append(label2, scoreField);
 
+  // create div for submit button
   const buttonDiv = document.createElement("div");
   buttonDiv.setAttribute("class", "submit-button-container box-row");
   const submitButton = document.createElement("button");
@@ -353,27 +377,27 @@ const renderForm = () => {
   submitButton.textContent = "Continue";
   buttonDiv.append(submitButton);
 
+  // create div for displaying alert message regarding 0 score
   const alertDiv = document.createElement("div");
   alertDiv.setAttribute("class", "alert-container");
   alertDiv.textContent =
     "You need to score above 0 for your score to be saved in the high scores tables";
-
   //append all divs to form
   form.append(h2, p1, inputDiv, scoreDiv, buttonDiv, alertDiv);
   //append form to form section
   formSection.append(form);
-  // append section to main
+  // append form section to main
   main.append(formSection);
-  // add submit event handler to form
+  // add submit event handler to form section
   formSection.addEventListener("submit", handleFormSubmit);
 };
 
 const handleQuestionClick = (event) => {
   event.stopPropagation();
   const currentTarget = event.currentTarget;
-
   const target = event.target;
 
+  // act only if click is on list item
   if (target.tagName === "LI") {
     //get the answer from the user
     const selectedAnswer = target.getAttribute("data-index");
@@ -383,14 +407,22 @@ const handleQuestionClick = (event) => {
       //add 1 to the count of correct answers
       correctAnswers += 1;
     }
-    //else, do nothing
+
+    //remove the current section displayed
     currentTarget.remove();
-    //increase question index by 1 + go to the next question
+    //check where we are in list of question - if we are not at the last one
     if (questionIndex < selectedQuestions.length - 1) {
+      // increase question index by 1
       questionIndex += 1;
+      // render the next question
       renderQuestion(selectedQuestions[questionIndex]);
-    } else {
+    }
+    // if we are at the last question
+    else {
+      // save the score
       score = timerValue;
+      quizComplete = true;
+      // render the form section
       renderForm(score);
     }
   }
@@ -422,9 +454,10 @@ const renderQuestion = (question) => {
     li.textContent = question.options[i];
     ul.appendChild(li);
   }
-  //append children to section
+  //append children to question div
   questionDiv.append(h2, ul);
 
+  // create status div
   const statusDiv = document.createElement("div");
   statusDiv.setAttribute("class", "status-container");
   const progressBar = document.createElement("progress");
@@ -436,6 +469,7 @@ const renderQuestion = (question) => {
   p.setAttribute("class", "correct-status");
   p.setAttribute("id", "correct-status");
   p.textContent = `Correct answers : ${correctAnswers} / ${progressBar.max}`;
+  // append children to status div
   statusDiv.append(progressBar, p);
 
   //append both divs to question section
@@ -444,7 +478,7 @@ const renderQuestion = (question) => {
   //append question section to main
   main.append(questionSection);
 
-  //add event listener on div
+  //add event listener on question section
   questionSection.addEventListener("click", handleQuestionClick);
 };
 
@@ -452,25 +486,23 @@ const handleThemeClick = (event) => {
   //event.stopPropagation();
   const target = event.target;
   const currentTarget = event.currentTarget;
-  console.log(currentTarget);
-  console.log(target);
 
+  // act only if click is on list item
   if (target.tagName === "LI") {
-    //get the answer from the user
+    // get the answer from the user
     selectedTheme = target.getAttribute("data-text");
+    // create the array containing the questions matching the selected theme
     selectedQuestions = questions.filter(
       (question) => question.theme === selectedTheme
     );
+    //set the time value according to the array length - 10s per question
     timerValue = 10 * selectedQuestions.length;
-    console.log(selectedQuestions);
-    console.log(timerValue);
 
-    //remove the current section displayed
+    // remove the current section displayed
     currentTarget.remove();
-    //calls the function to render the relevant section
+    // render the next relevant section
     renderTimerSection(timerValue);
     renderQuestion(selectedQuestions[questionIndex]);
-    //go to the next section - question section
   }
 };
 
@@ -505,13 +537,14 @@ const renderTheme = () => {
     li.textContent = themes[i];
     ul.appendChild(li);
   }
-  //append children to section
+  //append children to theme div
   themeDiv.append(h2, ul);
+  //append div to section
   themeSelection.append(themeDiv);
   //append section to main
   main.append(themeSelection);
 
-  //const section = document.getElementById(themeDiv);
+  // add event listener on theme section
   themeSelection.addEventListener("click", handleThemeClick);
 };
 
