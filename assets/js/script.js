@@ -176,6 +176,7 @@ const onLoad = () => {
   //if it doesn't exist, set an empty array and stringify as we set it
   if (!highScoresFromLS) {
     localStorage.setItem("highScores", JSON.stringify([]));
+    console.log(highScores);
   }
 };
 
@@ -260,20 +261,87 @@ const renderGameOver = () => {
   // append section to main
 };
 
+const renderQuizCompleteSection = () => {
+  // use HTML as guide and build in JS
+  // append section to main
+};
+
 const renderAlert = (message, status) => {
   // use HTML as guide and build in JS
   // append div to #question-section
 };
 
 const renderForm = () => {
-  // use HTML as guide and build in JS
-  // append section to main
-  // add submit event handler to form
-};
+  // create section
+  const formSection = document.createElement("section");
+  formSection.setAttribute("class", "form-section wrapper");
+  formSection.setAttribute("id", "form-section");
 
-const renderQuizCompleteSection = () => {
-  // use HTML as guide and build in JS
+  const form = document.createElement("form");
+  form.setAttribute("class", "form-container");
+  form.setAttribute("id", "form-container");
+
+  const h2 = document.createElement("h2");
+  h2.setAttribute("class", "title");
+  h2.textContent = "Let's save your score!";
+
+  const p1 = document.createElement("p");
+  p1.setAttribute("class", "alert-container");
+  p1.textContent = `Your result: <br />
+  You just took the ${selectedTheme} quiz and answered ${correctAnswers} questions correctly
+  out of ${selectedQuestions.length}. <br />
+  You scored ${score}.`;
+
+  const inputDiv = document.createElement("div");
+  inputDiv.setAttribute("class", "input-container box-row");
+  inputDiv.setAttribute("id", "input-container");
+  const label1 = document.createElement("label");
+  label1.setAttribute("class", "input-label");
+  label1.setAttribute("for", "input");
+  label1.textContent = "Enter your initials";
+  const input = document.createElement("input");
+  input.setAttribute("class", "input-field");
+  input.setAttribute("type", "text");
+  input.setAttribute("aria-label", "enter your initials");
+  inputDiv.append(label1, input);
+
+  const scoreDiv = document.createElement("div");
+  scoreDiv.setAttribute("class", "score-container box-row");
+  scoreDiv.setAttribute("id", "score-container");
+  const label2 = document.createElement("label");
+  label2.setAttribute("class", "score-label");
+  label2.setAttribute("for", "text-area");
+  label2.textContent = "Your score";
+  const scoreField = document.createElement("textArea");
+  scoreField.setAttribute("class", "score-field");
+  scoreField.setAttribute("id", "score-field");
+  scoreField.setAttribute("aria-label", "your score");
+  scoreField.setAttribute("readonly", true);
+  scoreField.textContent = `${score}`;
+  scoreDiv.append(label2, scoreField);
+
+  const buttonDiv = document.createElement("div");
+  buttonDiv.setAttribute("class", "submit-button-container box-row");
+  const submitButton = document.createElement("button");
+  submitButton.setAttribute("class", "submit-btn btn");
+  submitButton.setAttribute("type", "submit");
+  submitButton.setAttribute("id", "submit");
+  submitButton.textContent = "Continue";
+  buttonDiv.append(submitButton);
+
+  const alertDiv = document.createElement("div");
+  alertDiv.setAttribute("class", "alert-container");
+  alertDiv.textContent =
+    "You need to score above 0 for your score to be saved in the high scores tables";
+
+  //append all divs to form
+  form.append(h2, p1, inputDiv, scoreDiv, buttonDiv, alertDiv);
+  //append form to form section
+  formSection.append(form);
   // append section to main
+  main.append(formSection);
+  // add submit event handler to form
+  formSection.addEventListener("click", handleFormSubmit);
 };
 
 const handleQuestionClick = (event) => {
@@ -416,7 +484,6 @@ const renderTheme = () => {
     li.setAttribute("id", themes[i]);
     li.textContent = themes[i];
     ul.appendChild(li);
-    console.log(li);
   }
   //append children to section
   themeDiv.append(h2, ul);

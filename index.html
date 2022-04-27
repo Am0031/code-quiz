@@ -39,15 +39,15 @@
         </div>
       </section> -->
       <!--3rd section - Theme and Timer banner-->
-      <section class="timer-section box-row" id="timer-section">
+      <!-- <section class="timer-section box-row" id="timer-section">
         <div>
-          <p class="theme-display">Javascript Quiz</p>
+          <p class="theme-display">Quiz Theme : Javascript</p>
         </div>
         <div class="timer-display box-row">
           <p class="timer-item">Time remaining :</p>
           <span class="timer-item" id="timer-span">60</span>
         </div>
-      </section>
+      </section> -->
       <!--4th section - Quiz questions with progress status-->
       <!-- <section class="question-section wrapper" id="question-section">
         <div class="question-container">
@@ -73,12 +73,22 @@
       <section class="form-section wrapper" id="form-section">
         <form class="form-container">
           <h2 class="title">Let's save your score!</h2>
+          <p class="alert-container">
+            Your result: <br />
+            You just took the Javascript quiz and answered 4 questions correctly
+            out of 6. <br />
+            You scored 24.
+          </p>
           <div class="input-container box-row">
             <label class="input-label" for="input">Enter your initials</label>
-            <input class="input-field" type="text" />
+            <input
+              class="input-field"
+              type="text"
+              aria-label="enter your initials"
+            />
           </div>
           <div class="score-container box-row" id="score-container">
-            <p class="score-label">Score</p>
+            <label class="score-label" for="text-area">Your Score</label>
             <textarea
               readonly
               class="score-field"

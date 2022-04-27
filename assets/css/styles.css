@@ -140,6 +140,10 @@ button[disabled] {
 .score-field {
   flex-grow: 1;
 }
+.alert-container {
+  text-align: center;
+  margin: 1rem 0;
+}
 
 .submit-button-container {
   justify-content: center;
