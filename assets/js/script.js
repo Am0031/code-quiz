@@ -202,7 +202,7 @@ const startTimer = () => {
         score = 0;
         document.getElementById("timer-section").remove();
         document.getElementById("question-section").remove();
-        renderForm(score);
+        renderQuizOver();
       }
     }
   };
@@ -289,6 +289,40 @@ const renderTimerSection = () => {
 
   //start the timer
   startTimer(timerValue);
+};
+
+const renderQuizOver = () => {
+  // create section
+  const endSection = document.createElement("section");
+  endSection.setAttribute("class", "end-section wrapper");
+  endSection.setAttribute("id", "end-section");
+  // create h2
+  const h2 = document.createElement("h2");
+  h2.setAttribute("class", "title");
+  h2.textContent = "Take the code quiz challenge again!";
+  // create paragraph
+  const p1 = document.createElement("p");
+  p1.setAttribute("class", "message-container");
+  p1.innerHTML = "You ran out of time so you didn't score any points!";
+  const p2 = document.createElement("p");
+  p2.setAttribute("class", "message-container");
+  p2.innerHTML = "Click Continue to try again or go see the High Scores table.";
+  //create links
+  const aHome = document.createElement("a");
+  aHome.setAttribute("class", "btn retry-btn link");
+  aHome.setAttribute("id", "retry-btn");
+  aHome.setAttribute("href", "./index.html");
+  aHome.textContent = "Retry";
+  const aScores = document.createElement("a");
+  aScores.setAttribute("class", "btn scores-btn link");
+  aScores.setAttribute("id", "scores-btn");
+  aScores.setAttribute("href", "./scores.html");
+  aScores.textContent = "Go to High Scores";
+
+  // append children to section
+  endSection.append(h2, p1, p2, aHome, aScores);
+  // append section to main
+  main.append(endSection);
 };
 
 const renderQuizCompleteSection = () => {
@@ -497,7 +531,9 @@ const renderQuestion = (question) => {
   const p = document.createElement("p");
   p.setAttribute("class", "correct-status");
   p.setAttribute("id", "correct-status");
-  p.textContent = `Correct answers : ${correctAnswers} / ${progressBar.max}`;
+  p.textContent = `Remaining questions : ${
+    selectedQuestions.length - questionIndex
+  }`;
   // append children to status div
   statusDiv.append(progressBar, p);
 
