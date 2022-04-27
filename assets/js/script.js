@@ -332,12 +332,12 @@ const renderForm = () => {
   h2.textContent = "Let's save your score!";
 
   // create paragraph
-  const p1 = document.createElement("p");
-  p1.setAttribute("class", "alert-container");
-  p1.innerHTML = `Your result: <br />
-  You just took the ${selectedTheme} quiz and answered ${correctAnswers} questions correctly
-  out of ${selectedQuestions.length}. <br />
-  You scored ${score}.`;
+  const alertDiv1 = document.createElement("div");
+  alertDiv1.setAttribute("class", "alert-container");
+  alertDiv1.innerHTML = `<p>Your result: </p>
+  <p>You just took the ${selectedTheme} quiz and answered ${correctAnswers} questions correctly
+  out of ${selectedQuestions.length}.</p>
+  <p>You scored ${score}.</p>`;
 
   //create div for input label and text field
   const inputDiv = document.createElement("div");
@@ -381,12 +381,12 @@ const renderForm = () => {
   buttonDiv.append(submitButton);
 
   // create div for displaying alert message regarding 0 score
-  const alertDiv = document.createElement("div");
-  alertDiv.setAttribute("class", "alert-container");
-  alertDiv.textContent =
+  const alertDiv2 = document.createElement("div");
+  alertDiv2.setAttribute("class", "alert-container");
+  alertDiv2.textContent =
     "You need to score above 0 for your score to be saved in the high scores tables";
   //append all divs to form
-  form.append(h2, p1, inputDiv, scoreDiv, buttonDiv, alertDiv);
+  form.append(h2, alertDiv1, inputDiv, scoreDiv, buttonDiv, alertDiv2);
   //append form to form section
   formSection.append(form);
   // append form section to main
