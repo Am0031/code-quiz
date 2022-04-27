@@ -210,42 +210,29 @@ const startTimer = () => {
   const timerId = setInterval(countdown, 1000);
 };
 
-const validateAnswer = () => {
-  // get answer clicked from user
-  // get the correct answer for question
-  // compare the 2 answers
-  // if incorrect subtract 5 seconds from timerValue
-  // if incorrect render error alert with message and status
-  // if correct render success alert with message and status
-  // set timeout for 500ms and then go to next question
-  // if question is last question set quizComplete to true and then render form
-  // if question is not last question then increment question index and render next question
-};
-
 const handleFormSubmit = (event) => {
   event.stopPropagation();
   event.preventDefault();
   const currentTarget = event.currentTarget;
   // get value from input
-  const initials = document.getElementById("input-field").value;
-  console.log(initials);
-  console.log(score);
+  const fullName = document.getElementById("input-field").value;
+
   // check if empty then render error alert with message and status
-  if (!initials) {
+  if (!fullName) {
     alert("Please enter your initials to save your score");
   }
   // if not empty then create the score object
   else {
     if (score) {
       const newHighScore = {
-        initials,
+        fullName,
         score,
       };
       highScores = JSON.parse(localStorage.getItem(localStorageKey));
-      console.log(highScores);
+
       // push new score object into array
       highScores.push(newHighScore);
-      console.log(highScores);
+
       // push updated array to LS
       localStorage.setItem(localStorageKey, JSON.stringify(highScores));
     }
@@ -298,7 +285,7 @@ const renderQuizOver = () => {
   // create h2
   const h2 = document.createElement("h2");
   h2.setAttribute("class", "title");
-  h2.textContent = "Take the code quiz challenge again!";
+  h2.textContent = "Let's save your score!";
   // create paragraph
   const p1 = document.createElement("p");
   p1.setAttribute("class", "message-container");
