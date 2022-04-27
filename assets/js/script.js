@@ -461,12 +461,15 @@ const handleQuestionClick = (event) => {
   // act only if click is on list item
   if (target.tagName === "LI") {
     //get the answer from the user
-    const selectedAnswer = target.getAttribute("data-index");
-
+    const selectedAnswer = parseInt(target.getAttribute("data-index"));
+    console.log(selectedAnswer);
+    console.log(correctAnswers);
     //compare data index to correct index
-    if (selectedAnswer == selectedQuestions[questionIndex].correctIndex) {
+    if (selectedAnswer === selectedQuestions[questionIndex].correctIndex) {
       //add 1 to the count of correct answers
       correctAnswers += 1;
+      console.log(selectedQuestions[questionIndex].correctIndex);
+      console.log(correctAnswers);
     } else {
       timerValue -= 5;
     }
@@ -629,7 +632,9 @@ const takeQuiz = () => {
   //continue quiz + continue validating answers
   // --> from handleQuestionClick goes to renderQuestion, and on click back to handleQuestionClick
 
-  //move to form on quiz completion --> from handleQuestionClick goes to renderForm
+  // move to quiz over page when timer runs out but quiz is not finished --> from startTimer, when reaches 0 goes to renderQuizOver
+
+  //move to form on quiz completion (other than score = 0) --> from handleQuestionClick goes to renderForm
 
   //submit score --> with submit event listener in renderForm goes to handleFormSubmit
 
