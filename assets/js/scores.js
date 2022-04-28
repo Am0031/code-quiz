@@ -1,6 +1,12 @@
-const localStorageKey = "highScores";
-let highScoresFromLS = [];
-let topHighScores = [];
+const scoresLSKey = "highScores";
+
+const getFromLS = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+};
+
+const getScoresFromLS = () => {
+  return getFromLS(scoresLSKey);
+};
 
 const renderNoScoresMessage = () => {
   //create section
@@ -32,11 +38,13 @@ const renderNoScoresMessage = () => {
   main.append(section);
 };
 
-const sortHighScores = () => {
+const getHighScores = (highScoresFromLS) => {
   //use array.sort function
+  highScoresFromLS.sort((a, b) => b.score - a.score);
+  return highScoresFromLS.slice(0, 5);
 };
 
-const renderHighScoresTable = () => {
+const renderHighScoresTable = (topHighScores) => {
   //create section
   const section = document.createElement("section");
   section.setAttribute("class", "high-score-section wrapper");
@@ -85,14 +93,14 @@ const renderHighScoresTable = () => {
 
 const onLoad = () => {
   // function to get array from local storage
-  highScoresFromLS = JSON.parse(localStorage.getItem(localStorageKey));
+  const highScoresFromLS = getScoresFromLS();
 
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
-  if (!highScoresFromLS) {
+  if (highScoresFromLS.length === 0) {
     renderNoScoresMessage();
   } else {
-    sortHighScores(highScoresFromLS);
+    const topHighScores = getHighScores(highScoresFromLS);
     renderHighScoresTable(topHighScores);
   }
 };
