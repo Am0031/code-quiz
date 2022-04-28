@@ -554,14 +554,18 @@ const renderQuestion = (question) => {
   //create ul
   const ul = document.createElement("ul");
   ul.setAttribute("class", "list");
+
   //for each theme create li and append to ul
-  for (let i = 0; i < question.options.length; i += 1) {
+  const renderListItems = (option, i) => {
     const li = document.createElement("li");
     li.setAttribute("class", "list-item btn");
     li.setAttribute("data-index", i);
-    li.textContent = question.options[i];
+    li.textContent = option;
     ul.appendChild(li);
-  }
+  };
+
+  question.options.forEach(renderListItems);
+
   //append children to question div
   questionDiv.append(h2, ul);
 
