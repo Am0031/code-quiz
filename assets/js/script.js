@@ -165,18 +165,43 @@ let timerValue = 10 * selectedQuestions.length;
 let correctAnswers = 0;
 let quizComplete = false;
 let score = 0;
-let highScores = [];
-const localStorageKey = "highScores";
+
+const scoresLSKey = "highScores";
+
+const getFromLS = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+};
+
+const getScoresFromLS = () => {
+  return getFromLS(scoresLSKey);
+};
+
+const createScoresInLS = () => {
+  localStorage.setItem(scoresLSKey, JSON.stringify([]));
+};
+
+const writeToLS = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+const writeScoresToLS = (data) => {
+  //get scores from Local storage
+  const highScores = getScoresFromLS();
+  // push new score object into array
+  highScores.push(data);
+  //write the updated array into local storage
+  writeToLS(scoresLSKey, highScores);
+};
 
 const onLoad = () => {
   // function to initialise local storage
   //get info from local storage
-  const highScoresFromLS = JSON.parse(localStorage.getItem(localStorageKey));
+  const highScoresFromLS = getScoresFromLS();
 
   // check if highscores exists in LS
   //if it doesn't exist, set an empty array and stringify as we set it
   if (!highScoresFromLS) {
-    localStorage.setItem(localStorageKey, JSON.stringify([]));
+    createScoresInLS();
   }
 };
 
@@ -228,13 +253,8 @@ const handleFormSubmit = (event) => {
         fullName,
         score,
       };
-      highScores = JSON.parse(localStorage.getItem(localStorageKey));
 
-      // push new score object into array
-      highScores.push(newHighScore);
-
-      // push updated array to LS
-      localStorage.setItem(localStorageKey, JSON.stringify(highScores));
+      writeScoresToLS(newHighScore);
     }
     // remove form section
     currentTarget.remove();
