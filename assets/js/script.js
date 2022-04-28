@@ -161,7 +161,7 @@ const questions = [
 let selectedTheme = "";
 let selectedQuestions = [];
 let questionIndex = 0;
-let timerValue = 10 * selectedQuestions.length;
+let timerValue;
 let correctAnswers = 0;
 let quizComplete = false;
 let score = 0;
@@ -294,7 +294,7 @@ const renderTimerSection = () => {
   main.append(timerSection);
 
   //start the timer
-  startTimer(timerValue);
+  startTimer();
 };
 
 const renderQuizOver = () => {
@@ -492,7 +492,7 @@ const handleQuestionClick = (event) => {
       score = timerValue;
       quizComplete = true;
       // render the form section
-      renderForm(score);
+      renderForm();
     }
   }
 };
@@ -572,7 +572,7 @@ const handleThemeClick = (event) => {
     // remove the current section displayed
     currentTarget.remove();
     // render the next relevant section
-    renderTimerSection(timerValue);
+    renderTimerSection();
     renderQuestion(selectedQuestions[questionIndex]);
   }
 };
@@ -600,14 +600,17 @@ const renderTheme = () => {
   const ul = document.createElement("ul");
   ul.setAttribute("class", "list");
   //for each theme create li and append to ul
-  for (let i = 0; i < themes.length; i += 1) {
+  const renderListItems = (theme) => {
     const li = document.createElement("li");
     li.setAttribute("class", "theme-item btn");
-    li.setAttribute("data-text", themes[i]);
-    li.setAttribute("id", themes[i]);
-    li.textContent = themes[i];
+    li.setAttribute("data-text", theme);
+    li.setAttribute("id", theme);
+    li.textContent = theme;
     ul.appendChild(li);
-  }
+  };
+
+  themes.forEach(renderListItems);
+
   //append children to theme div
   themeDiv.append(h2, ul);
   //append div to section
