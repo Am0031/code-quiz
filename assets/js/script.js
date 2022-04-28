@@ -370,7 +370,7 @@ const renderForm = () => {
 
   // create form
   const form = document.createElement("form");
-  form.setAttribute("class", "form-container");
+  form.setAttribute("class", "form-container wrapper");
   form.setAttribute("id", "form-container");
 
   //create h2

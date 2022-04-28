@@ -4,6 +4,7 @@
   --button: rgb(94, 8, 175);
   --body: #f9fbfd;
   --background: hsl(266, 26%, 95%);
+  --table-header: lightgray;
 }
 *,
 *::before,
@@ -162,19 +163,34 @@ button[disabled] {
 
 .score-table {
   border-collapse: collapse;
-  border-spacing: 0;
   margin: 1rem;
   text-align: center;
   font-weight: bold;
+  display: block;
+  align-items: center;
 }
+
 .score-table th,
 .score-table td {
   padding: 0.5rem 1rem;
   border: 1px solid #000;
+  align-items: center;
+}
+.score-table th {
+  background-color: var(--table-header);
 }
 
 /*media queries*/
 @media (max-width: 690px) {
+  .btn {
+    font-size: 1rem;
+    margin: 1rem 0 0 0;
+    padding: 0.6rem 1rem;
+    width: 100%;
+  }
+  .footerbar {
+    font-size: 0.8rem;
+  }
   .question-container {
     width: 100%;
   }
@@ -184,27 +200,22 @@ button[disabled] {
   .alert-container {
     padding: 1rem 0 1rem 0;
   }
-
-  .btn {
-    font-size: 1rem;
-    margin: 1rem 0 0 0;
-    padding: 0.6rem 1rem;
-    width: 100%;
-  }
-
   .start,
   .retry,
   .form-container,
   .submit-button-container {
     width: 100%;
   }
-  .submit-button-container {
-    justify-content: space-evenly;
-  }
 }
 
 @media (max-width: 500px) {
   .btn {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0 0;
+    padding: 0.3rem 0.5rem;
+    width: 100%;
+  }
+  .footerbar {
     font-size: 0.8rem;
   }
   .question-container {
@@ -212,5 +223,14 @@ button[disabled] {
   }
   .list {
     padding: 0;
+  }
+  .alert-container {
+    padding: 0.6rem 0 0.6rem 0;
+  }
+  .start,
+  .retry,
+  .form-container,
+  .submit-button-container {
+    width: 100%;
   }
 }
