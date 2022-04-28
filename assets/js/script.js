@@ -1,6 +1,4 @@
-// global declarations
-const themes = ["html", "css", "javascript", "jquery"];
-
+// global declarations - questions
 const questions = [
   {
     theme: "html",
@@ -158,6 +156,7 @@ const questions = [
     correctIndex: 2,
   },
 ];
+// global declarations for variables used in several functions
 let selectedTheme = "";
 let selectedQuestions = [];
 let questionIndex = 0;
@@ -165,9 +164,13 @@ let timerValue;
 let correctAnswers = 0;
 let quizComplete = false;
 let score = 0;
-
 const scoresLSKey = "highScores";
 
+//extracting themes from set of questions
+let themes = [...new Set(questions.map((a) => a.theme))];
+console.log(themes);
+
+// utility functions
 const getFromLS = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
@@ -193,6 +196,7 @@ const writeScoresToLS = (data) => {
   writeToLS(scoresLSKey, highScores);
 };
 
+//function to run on load of page
 const onLoad = () => {
   // function to initialise local storage
   //get info from local storage
@@ -205,98 +209,7 @@ const onLoad = () => {
   }
 };
 
-const startTimer = () => {
-  // declare variable for timer span
-  const timerSpan = document.getElementById("timer-span");
-  // declare function to execute every 1 sec
-  const countdown = () => {
-    // target timer span -> done outside of function
-    //decrement timer value
-    timerValue -= 1;
-    //set text in timer span as new value
-    timerSpan.textContent = timerValue;
-    // check if quiz is complete
-    if (quizComplete) {
-      clearInterval(timerId);
-      document.getElementById("timer-section").remove();
-    } else {
-      // check if timer reaches 0
-      if (timerValue <= 0) {
-        clearInterval(timerId);
-        score = 0;
-        document.getElementById("timer-section").remove();
-        document.getElementById("question-section").remove();
-        renderQuizOver();
-      }
-    }
-  };
-
-  // setInterval of 1000ms (1s)
-  const timerId = setInterval(countdown, 1000);
-};
-
-const handleFormSubmit = (event) => {
-  event.stopPropagation();
-  event.preventDefault();
-  const currentTarget = event.currentTarget;
-  // get value from input
-  const fullName = document.getElementById("input-field").value;
-
-  // check if empty then render error alert with message and status
-  if (!fullName) {
-    alert("Please enter your initials to save your score");
-  }
-  // if not empty then create the score object
-  else {
-    if (score) {
-      const newHighScore = {
-        fullName,
-        score,
-      };
-
-      writeScoresToLS(newHighScore);
-    }
-    // remove form section
-    currentTarget.remove();
-    // render quizComplete section
-    renderQuizCompleteSection();
-  }
-};
-
-const renderTimerSection = () => {
-  // create section
-  const timerSection = document.createElement("section");
-  timerSection.setAttribute("class", "timer-section box-row");
-  timerSection.setAttribute("id", "timer-section");
-
-  // create div for theme name
-  const timerDivTheme = document.createElement("div");
-  const p1 = document.createElement("p");
-  p1.setAttribute("class", "theme-display");
-  p1.textContent = `Quiz - Theme : ${selectedTheme}`;
-  timerDivTheme.append(p1);
-
-  // create div for timer number
-  const timerDivNum = document.createElement("div");
-  timerDivNum.setAttribute("class", "timer-display box-row");
-  const p2 = document.createElement("p");
-  p2.setAttribute("class", "timer-item");
-  p2.textContent = "Time remaining : ";
-  const span = document.createElement("span");
-  span.setAttribute("class", "timer-item");
-  span.setAttribute("id", "timer-span");
-  span.textContent = ` ${timerValue} `;
-
-  // append divs to section
-  timerDivNum.append(p2, span);
-  timerSection.append(timerDivTheme, timerDivNum);
-  // append section to main
-  main.append(timerSection);
-
-  //start the timer
-  startTimer();
-};
-
+//functions to render the different quiz pages
 const renderQuizOver = () => {
   // create section
   const endSection = document.createElement("section");
@@ -360,6 +273,34 @@ const renderQuizCompleteSection = () => {
   endSection.append(h2, p, aHome, aScores);
   // append section to main
   main.append(endSection);
+};
+
+const handleFormSubmit = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  const currentTarget = event.currentTarget;
+  // get value from input
+  const fullName = document.getElementById("input-field").value;
+
+  // check if empty then render error alert with message and status
+  if (!fullName) {
+    alert("Please enter your initials to save your score");
+  }
+  // if not empty then create the score object
+  else {
+    if (score) {
+      const newHighScore = {
+        fullName,
+        score,
+      };
+
+      writeScoresToLS(newHighScore);
+    }
+    // remove form section
+    currentTarget.remove();
+    // render quizComplete section
+    renderQuizCompleteSection();
+  }
 };
 
 const renderForm = () => {
@@ -457,6 +398,70 @@ const renderForm = () => {
   main.append(formSection);
   // add submit event handler to form section
   formSection.addEventListener("submit", handleFormSubmit);
+};
+
+const startTimer = () => {
+  // declare variable for timer span
+  const timerSpan = document.getElementById("timer-span");
+  // declare function to execute every 1 sec
+  const countdown = () => {
+    // target timer span -> done outside of function
+    //decrement timer value
+    timerValue -= 1;
+    //set text in timer span as new value
+    timerSpan.textContent = timerValue;
+    // check if quiz is complete
+    if (quizComplete) {
+      clearInterval(timerId);
+      document.getElementById("timer-section").remove();
+    } else {
+      // check if timer reaches 0
+      if (timerValue <= 0) {
+        clearInterval(timerId);
+        score = 0;
+        document.getElementById("timer-section").remove();
+        document.getElementById("question-section").remove();
+        renderQuizOver();
+      }
+    }
+  };
+
+  // setInterval of 1000ms (1s)
+  const timerId = setInterval(countdown, 1000);
+};
+
+const renderTimerSection = () => {
+  // create section
+  const timerSection = document.createElement("section");
+  timerSection.setAttribute("class", "timer-section box-row");
+  timerSection.setAttribute("id", "timer-section");
+
+  // create div for theme name
+  const timerDivTheme = document.createElement("div");
+  const p1 = document.createElement("p");
+  p1.setAttribute("class", "theme-display");
+  p1.textContent = `Quiz - Theme : ${selectedTheme}`;
+  timerDivTheme.append(p1);
+
+  // create div for timer number
+  const timerDivNum = document.createElement("div");
+  timerDivNum.setAttribute("class", "timer-display box-row");
+  const p2 = document.createElement("p");
+  p2.setAttribute("class", "timer-item");
+  p2.textContent = "Time remaining : ";
+  const span = document.createElement("span");
+  span.setAttribute("class", "timer-item");
+  span.setAttribute("id", "timer-span");
+  span.textContent = ` ${timerValue} `;
+
+  // append divs to section
+  timerDivNum.append(p2, span);
+  timerSection.append(timerDivTheme, timerDivNum);
+  // append section to main
+  main.append(timerSection);
+
+  //start the timer
+  startTimer();
 };
 
 const handleQuestionClick = (event) => {
@@ -622,7 +627,7 @@ const renderTheme = () => {
   themeSelection.addEventListener("click", handleThemeClick);
 };
 
-//main function - take quiz (+summary notes for general logic)
+//main function to take quiz - starts the process (and left comments in as summary notes for general logic)
 const takeQuiz = () => {
   //render theme selection
   renderTheme();
@@ -654,5 +659,3 @@ window.addEventListener("load", onLoad);
 // add event listener to start button
 const startBtn = document.querySelector("#start-btn");
 startBtn.addEventListener("click", takeQuiz);
-// add document on load event listener
-// add start button click event listener
