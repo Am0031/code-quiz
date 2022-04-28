@@ -155,6 +155,41 @@ const questions = [
     options: ["the % sign", "the & sign", "the $ sign", "the @ sign"],
     correctIndex: 2,
   },
+  {
+    theme: "jquery",
+    text:
+      "Which of the following jQuery method is used to hide the selected elements?",
+    options: [
+      "the hidden() method",
+      "the hide() method",
+      "the visible(false) method",
+      "the display(none) method",
+    ],
+    correctIndex: 1,
+  },
+  {
+    theme: "jquery",
+    text:
+      "Which of the jQuery function prevents the code from running before the loading of the document finishes?",
+    options: [
+      "$(document).load()",
+      "$(document).unload()",
+      "$(document).ready()",
+      "$(document).trim()",
+    ],
+    correctIndex: 2,
+  },
+  {
+    theme: "jquery",
+    text: 'What does the syntax $("p.para") will select?',
+    options: [
+      'The first paragraph element with class = "para"',
+      'The first paragraph element with id = "para"',
+      'The first paragraph element with name = "para"',
+      'All paragraph elements with class = "para"',
+    ],
+    correctIndex: 3,
+  },
 ];
 // global declarations for variables used in several functions
 let selectedTheme = "";
@@ -168,7 +203,6 @@ const scoresLSKey = "highScores";
 
 //extracting themes from set of questions
 let themes = [...new Set(questions.map((a) => a.theme))];
-console.log(themes);
 
 // utility functions
 const getFromLS = (key) => {

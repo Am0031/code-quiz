@@ -1,5 +1,7 @@
+// global declarations for variables used in several functions
 const scoresLSKey = "highScores";
 
+// utility functions
 const getFromLS = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
@@ -38,6 +40,7 @@ const renderNoScoresMessage = () => {
   main.append(section);
 };
 
+//functions to render the high scores table
 const getHighScores = (highScoresFromLS) => {
   //use array.sort function
   highScoresFromLS.sort((a, b) => b.score - a.score);
@@ -91,6 +94,7 @@ const renderHighScoresTable = (topHighScores) => {
   main.append(section);
 };
 
+//function to trigger what happens on load of the page
 const onLoad = () => {
   // function to get array from local storage
   const highScoresFromLS = getScoresFromLS();
