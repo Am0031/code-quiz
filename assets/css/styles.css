@@ -153,6 +153,9 @@ button[disabled] {
 .score-field {
   flex-grow: 1;
 }
+.input-label {
+  text-align: center;
+}
 .message-container {
   text-align: center;
   margin: 1rem 0;
