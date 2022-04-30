@@ -72,15 +72,16 @@ const renderHighScoresTable = (topHighScores) => {
   header.append(headerData1, headerData2);
   table.appendChild(header);
 
-  for (let i = 0; i < topHighScores.length; i += 1) {
+  const renderRows = (highScore) => {
     const row = document.createElement("tr");
     const rowData1 = document.createElement("td");
-    rowData1.innerHTML = topHighScores[i].fullName;
+    rowData1.innerHTML = highScore.fullName;
     const rowData2 = document.createElement("td");
-    rowData2.innerHTML = topHighScores[i].score;
+    rowData2.innerHTML = highScore.score;
     row.append(rowData1, rowData2);
     table.appendChild(row);
-  }
+  };
+  topHighScores.forEach(renderRows);
 
   const aHome = document.createElement("a");
   aHome.setAttribute("class", "btn home-btn link");
