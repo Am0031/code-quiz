@@ -318,7 +318,7 @@ const handleFormSubmit = (event) => {
 
   // check if empty then render error alert with message and status
   if (!fullName) {
-    alert("Please enter your initials to save your score");
+    alert("Please enter your name to save your score");
   }
   // if not empty then create the score object
   else {
@@ -490,7 +490,6 @@ const renderTimerSection = () => {
 };
 
 const handleQuestionClick = (event) => {
-  event.stopPropagation();
   const currentTarget = event.currentTarget;
   const target = event.target;
 
@@ -588,7 +587,6 @@ const renderQuestion = (question) => {
 };
 
 const handleThemeClick = (event) => {
-  //event.stopPropagation();
   const target = event.target;
   const currentTarget = event.currentTarget;
 
@@ -642,7 +640,6 @@ const renderTheme = () => {
     li.textContent = theme;
     ul.appendChild(li);
   };
-
   themes.forEach(renderListItems);
 
   //append children to theme div
