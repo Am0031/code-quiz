@@ -580,9 +580,9 @@ const renderQuestion = (question) => {
   const p = document.createElement("p");
   p.setAttribute("class", "correct-status");
   p.setAttribute("id", "correct-status");
-  p.textContent = `Remaining questions : ${
+  p.textContent = `Correct answers so far: ${correctAnswers}  -  Remaining questions : ${
     selectedQuestions.length - questionIndex
-  }`;
+  } out of ${selectedQuestions.length}`;
   // append children to status div
   statusDiv.append(progressBar, p);
 

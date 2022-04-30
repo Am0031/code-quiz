@@ -136,6 +136,9 @@ button[disabled] {
 .progress-bar {
   width: 100%;
 }
+.correct-status {
+  text-align: center;
+}
 /* Form section */
 .form-container {
   width: 70%;
