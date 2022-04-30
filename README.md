@@ -4,7 +4,7 @@ This project is about creating a code quiz, with a choice of themes, a set of qu
 
 These links provide more information about the [DOM tree](https://www.w3schools.com/js/js_htmldom.asp) and [what it is exactly](https://www.freecodecamp.org/news/what-is-the-dom-document-object-model-meaning-in-javascript/), as well as [the different methods used to interact with it](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 
-Deployed URL:
+Deployed URL: [https://am0031.github.io/code-quiz/](https://am0031.github.io/code-quiz/)
 
 Github repository: [https://github.com/Am0031/code-quiz](https://github.com/Am0031/code-quiz)
 
