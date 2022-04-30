@@ -8,6 +8,8 @@ Deployed URL: [https://am0031.github.io/code-quiz/](https://am0031.github.io/cod
 
 Github repository: [https://github.com/Am0031/code-quiz](https://github.com/Am0031/code-quiz)
 
+_Note: the answers to the quiz are provided in a notepad file called **code-quiz-answers** available in the code-quiz repository._
+
 ## Technologies
 
 For this quiz, the technologies used are:
