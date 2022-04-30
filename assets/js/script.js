@@ -405,15 +405,6 @@ const renderForm = () => {
   input.setAttribute("aria-label", "enter your initials");
   inputDiv.append(label1, input);
 
-  // create div for score label and text area containing score
-  const scoreDiv = document.createElement("div");
-  scoreDiv.setAttribute("class", "score-container box-row");
-  scoreDiv.setAttribute("id", "score-container");
-  const label2 = document.createElement("label");
-  label2.setAttribute("class", "score-label");
-  label2.setAttribute("for", "text-area");
-  label2.textContent = "Your score";
-
   // create div for submit button
   const buttonDiv = document.createElement("div");
   buttonDiv.setAttribute("class", "submit-button-container box-row");
@@ -425,7 +416,7 @@ const renderForm = () => {
   buttonDiv.append(submitButton);
 
   //append all divs to form
-  form.append(h2, p, table, inputDiv, scoreDiv, buttonDiv);
+  form.append(h2, p, table, inputDiv, buttonDiv);
   //append form to form section
   formSection.append(form);
   // append form section to main
