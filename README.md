@@ -53,14 +53,7 @@ Below is a screenshot of the general layout for the start page, for both desktop
 
 ![Start page wireframe](./assets/screenshots/screenshot-wireframe-start-page.png)
 
-The wireframe is also available for all the sections to be rendered with javascript. See below:
-
-<details>
-<summary> Complete wireframe for all pages and sections to be rendered</summary>
-
-![complete wireframe](./assets/screenshots/wireframes.pdf)
-
-</details>
+The wireframe is also available for all the sections to be rendered with javascript. See here the [complete wireframe](./assets/screenshots/wireframes.pdf).
 
 ## CSS styling
 
