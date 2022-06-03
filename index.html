@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Code Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/160a172e5c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <!--Header with nav links-->
+    <header class="header">
+      <nav class="navbar box-row">
+        <a class="navlink link" href="index.html"
+          ><i class="fa-solid fa-house"></i> Home
+        </a>
+        <a class="navlink link" href="scores.html"
+          ><i class="fa-solid fa-star"></i> High Scores
+        </a>
+      </nav>
+    </header>
+    <!--Main section, where sections will be dynamically removed and rendered in JS-->
+    <main class="main" id="main">
+      <!--1st section - Start the quiz-->
+      <section class="start-section wrapper" id="start-section">
+        <h1 class="title">Take the code quiz challenge!</h1>
+        <p>Try this quiz and see how you measure up against others.</p>
+        <div class="start">
+          <button class="btn start-btn" id="start-btn">Start</button>
+        </div>
+      </section>
+      <!--2nd to 6th section - to be rendered with JS-->
+    </main>
+    <!--Footer with contact links-->
+    <footer class="footer" id="footer">
+      <div class="footerbar box-row">
+        <div class="footer-text">
+          <a
+            class="link contact"
+            id="email"
+            href="mailto:amelie.pira@gmail.com"
+            target="_blank"
+            ><i class="fa-regular fa-envelope"></i>
+            Email me
+          </a>
+          <a
+            class="link contact"
+            id="github"
+            href="https://github.com/Am0031"
+            target="_blank"
+            ><i class="fa-brands fa-github"></i> Visit my Github
+          </a>
+        </div>
+        <div class="footer-text">&copy; 2022 - Amelie Pira</div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/script.js" async defer></script>
+  </body>
+</html>
